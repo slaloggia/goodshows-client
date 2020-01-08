@@ -37,8 +37,16 @@
   }
 }
 
+.ui.inverted.menu {
+  background: #e1003d
+}
+
 .home-container {
   width: 75%;
   margin-left: 10%
+}
+
+#login {
+  width: 30%
 }
 

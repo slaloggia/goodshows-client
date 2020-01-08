@@ -9,7 +9,7 @@ class CoverList extends React.Component {
 
     listShows = () => {
        return this.props.shows.map(show => (
-        <img src={show.image} className='list-image' alt='playbill'/>
+        <img src={show.image} className='list-image' alt='playbill' key={show.id}/>
       ) )
     }
 
