@@ -1,6 +1,9 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Card, Image } from 'semantic-ui-react'
+import { getShows } from '../actions/showActions'
+import WithShows from '../components/WithShows'
+
 
 class Shows extends Component {
 
@@ -11,15 +14,15 @@ class Shows extends Component {
 
     displayShowImages() {
         const displayShows = this.filterShows()
-        return displayShows.map(show => <div className='grid-item'key={show.id} id={show.id}>
-        <Card  className='show-grid-card'  >
+        return displayShows.map(show => 
+        <Card   key={show.id}>
             <Image src={show.image} id={show.id}/>
             <Card.Content>
                 <Card.Header>{show.title}</Card.Header>
                 <Card.Description className='show-category'>{show.category}</Card.Description>
             </Card.Content>
         </Card>
-        </div>)
+        )
     }
 
     handleImageClick = (event) => {
@@ -30,10 +33,20 @@ class Shows extends Component {
     }
 
     render() {
-        return <div className='grid-container' onClick={this.handleImageClick}>{this.displayShowImages()}</div>
+        return (
+        <Card.Group onClick={this.handleImageClick} itemsPerRow={5}>
+            {this.displayShowImages()}
+        </Card.Group>
+        )
     }
 }
 
 const mapStateToProps = ({shows}) => ({shows})
+function mapDispatchToProps(dispatch) {
+    return {
+        getShows: () => dispatch(getShows())
+    }
+}
 
-export default connect(mapStateToProps)(Shows)
+
+export default connect(mapStateToProps, mapDispatchToProps)(WithShows(Shows))

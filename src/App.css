@@ -56,3 +56,15 @@
   grid-template-columns: auto auto auto auto auto;
   justify-content: center
 }
+
+.ui.cards {
+  margin-left: 5%
+}
+
+.ui.card {
+  color: #e1003d
+}
+
+#show-detail-grid {
+  padding: 40px
+}
