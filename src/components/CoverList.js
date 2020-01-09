@@ -19,18 +19,18 @@ class CoverList extends React.Component {
       <div>
         <Coverflow
           width={480}
-          height={300}
+          height={500}
           displayQuantityOfSide={2}
           navigation={false}
           enableHeading={false}
           active={this.state.active}
           infiniteScroll={true}
-          media={{
-            '@media (max-width: 900px)': {
-              width: '400px',
-              height: '200px'
-            }
-          }}
+        //   media={{
+        //     '@media (max-width: 400px)': {
+        //       width: '400px',
+        //       height: '300px'
+        //     }
+        //   }}
         >
           <div
             // onClick={() => fn()}

@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import CoverList from '../components/CoverList'
 import { getShows } from '../actions/showActions'
-// import { Image } from 'semantic-ui-react'
 
 class Home extends Component {
 

@@ -2,8 +2,16 @@ import React, {Component} from 'react'
 import { connect } from 'react-redux'
 import { Menu } from 'semantic-ui-react'
 import history from '../history'
+import { logoutUser } from '../actions/userActions'
 
 class NavBar extends Component {
+
+    handleLogout = () => {
+        localStorage.removeItem('token')
+        this.props.logoutUser()
+        history.push('/')
+    }
+
     render() {
         return (
             <Menu inverted>
@@ -11,8 +19,8 @@ class NavBar extends Component {
                 <Menu.Item>Musicals</Menu.Item>
                 <Menu.Item>Plays</Menu.Item>
                 <Menu.Item>Specials</Menu.Item>
-                {this.props.currentUser.token ? 
-                <Menu.Item position='right' onClick={() => history.push('/dashboard')}>Profile</Menu.Item> :
+                {this.props.currentUser.id ? 
+                <Menu.Item position='right' onClick={this.handleLogout}>Log Out</Menu.Item> :
                 <Menu.Item position='right' onClick ={() => history.push('/login')} >Log In</Menu.Item>}
 
             </Menu>
@@ -22,4 +30,10 @@ class NavBar extends Component {
 
 const mapStateToProps = ({currentUser}) => ({currentUser})
 
-export default connect(mapStateToProps)(NavBar)
+function mapDispatchToProps(dispatch) {
+    return {
+        logoutUser: ()=> dispatch(logoutUser())
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(NavBar)
