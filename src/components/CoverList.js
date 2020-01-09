@@ -1,5 +1,6 @@
 import React from 'react';
 import Coverflow from 'react-coverflow';
+// import history from '../history'
 
 class CoverList extends React.Component {
 
@@ -7,9 +8,17 @@ class CoverList extends React.Component {
         active: 5
     }
 
+    // activeClick = (event) => {
+    //     console.log(event.target)
+    // }
+
+    setActive = (event) => {
+        console.log(event.target)
+    }
+
     listShows = () => {
        return this.props.shows.map(show => (
-        <img src={show.image} className='list-image' alt='playbill' key={show.id}/>
+        <img src={show.image} className='list-image' alt='playbill' id={show.id} key={show.id}  />
       ) )
     }
 
@@ -26,19 +35,19 @@ class CoverList extends React.Component {
           active={this.state.active}
           infiniteScroll={true}
         //   media={{
-        //     '@media (max-width: 400px)': {
-        //       width: '400px',
-        //       height: '300px'
+        //     '@media (max-width: 200px)': {
+        //       width: '200px',
+        //       height: '150px'
         //     }
         //   }}
         >
           <div
-            // onClick={() => fn()}
+            onClick={this.setActive}
             // onKeyDown={() => fn()}
             role="menuitem"
             tabIndex="0"
           >
-          </div>
+          </div >
           {this.listShows()}
 
         </Coverflow>
