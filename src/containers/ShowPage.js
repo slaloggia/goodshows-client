@@ -38,6 +38,7 @@ class ShowPage extends Component {
             <h5>{review.user.username}</h5>
             <p>Date: {review.created_at}</p>
             <p>{review.content}</p>
+            {console.log(review)}
         </div>)
         }
 
