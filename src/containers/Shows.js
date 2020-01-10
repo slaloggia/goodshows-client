@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Card, Image } from 'semantic-ui-react'
 import { getShows } from '../actions/showActions'
+import { loginSuccess } from '../actions/userActions'
 import WithShows from '../components/WithShows'
 
 
@@ -44,7 +45,8 @@ class Shows extends Component {
 const mapStateToProps = ({shows}) => ({shows})
 function mapDispatchToProps(dispatch) {
     return {
-        getShows: () => dispatch(getShows())
+        getShows: () => dispatch(getShows()),
+        loginSuccess: (user) => dispatch(loginSuccess(user))
     }
 }
 

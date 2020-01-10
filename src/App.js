@@ -8,6 +8,7 @@ import LogIn from './components/LogIn'
 import Dashboard from './containers/Dashboard'
 import ShowPage from './containers/ShowPage'
 import Shows from './containers/Shows'
+import Review from './components/Review'
 import history from './history';
 
 
@@ -20,8 +21,8 @@ function App() {
             <Route exact path='/' component={Home}/>
             <Route exact path='/login' component={LogIn} />
             <Route path='/dashboard' component={Dashboard} />
-            <Route path='/show/:id' component={ShowPage} />
-            {/* <Route path='/shows' component={Shows} /> */}
+            <Route exact path='/show/:id' component={ShowPage} />
+            <Route path='/show/:id/review' component={Review} />
             <Route path='/shows/:category' component={Shows} />
 
           </Switch>

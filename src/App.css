@@ -58,7 +58,7 @@
 }
 
 .ui.cards {
-  margin-left: 5%
+  padding: 10px
 }
 
 .ui.card {
@@ -68,3 +68,12 @@
 #show-detail-grid {
   padding: 40px
 }
+
+.review-form-container {
+  width: 50%;
+  margin-left: 25%;
+  margin-top: 10%;
+  background-color: ghostwhite;
+  padding: 10px
+}
+
