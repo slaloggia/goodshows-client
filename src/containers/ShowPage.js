@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Grid, Rating, Card, Image, Placeholder, Form, Dropdown } from 'semantic-ui-react'
 import WithShows from '../components/WithShows'
-import { getShows } from '../actions/showActions'
+import { getShows, addToList } from '../actions/showActions'
 import { loginSuccess } from '../actions/userActions'
 
 
@@ -27,7 +27,8 @@ class ShowPage extends Component {
                     <span>{show.category}</span>
                 </Card.Meta>
                 <Card.Description>
-                    <Rating defaultRating={3} maxRating={5} disabled/>
+                    <h4>Average User Rating:</h4>
+                    <Rating defaultRating={0} rating={this.getRating(show)} maxRating={5} disabled/>
                 </Card.Description>
 
             </Card.Content>
@@ -45,6 +46,33 @@ class ShowPage extends Component {
         </div>)}
     }
 
+    getRating(show) {
+        if (show.reviews.length > 0) {
+        const allRatings = show.reviews.map(review => parseInt(review.rating))
+        return allRatings.reduce((total=0, num) => total + num ) / allRatings.length 
+        }
+    }
+
+    handleSelect = (event) => {
+        event.preventDefault()
+        const choice = event.target.firstElementChild.innerText
+        let seen
+        if(this.props.currentUser.id) {
+        if(choice === 'Seen') {
+            seen = true
+        }else if(choice === 'Want to See') {
+            seen = false
+        }
+        let listItem = {
+            user_id: this.props.currentUser.id,
+            show_id: parseInt(this.props.match.params.id),
+            seen: seen
+        }
+
+        this.props.addToList(listItem)}else{ this.props.history.push('/login')}
+    }
+    
+
     render() {
         const show = this.findShow()
         const listOptions = [{text: 'Seen', value: true}, {text: 'Want to See', value: false}]
@@ -55,8 +83,8 @@ class ShowPage extends Component {
                 <Grid.Column width={6}>
                     {this.renderShowCard(show)}
                     {this.props.currentUser.id ? 
-                    <Form inverted size={'large'}>
-                        <Dropdown placeholder='Add To Your List' options={listOptions} />
+                    <Form inverted size={'large'} >
+                        <Dropdown placeholder='Add To Your List' selection options={listOptions}  onChange={this.handleSelect}/>
                     </Form> : null}
                 </Grid.Column>
                 <Grid.Column width={8}>
@@ -75,6 +103,7 @@ function mapDispatchToProps(dispatch) {
     return {
         getShows: () => dispatch(getShows()),
         loginSuccess: (user) => dispatch(loginSuccess(user)),
+        addToList: (listItem) => dispatch(addToList(listItem))
 
     }
 }

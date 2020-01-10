@@ -34,6 +34,7 @@ class Review extends Component {
         <div className='review-form-container'>
             <Form  onSubmit={this.handleSubmit}>
                 <div>
+                    <h4>Your Rating:</h4>
                     <div>Rating: {rating}</div>
                         <input
                         type='range'
