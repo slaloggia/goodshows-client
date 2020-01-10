@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import WithAuth from '../components/WithAuth'
 import { loginSuccess } from '../actions/userActions'
+import { getShows } from '../actions/showActions'
 import { createReview } from '../actions/reviewActions'
 import { Form, Rating, Button } from 'semantic-ui-react'
 
@@ -54,10 +55,11 @@ class Review extends Component {
 
 }
 
-const mapStateToProps = ({currentUser}) => ({currentUser})
+const mapStateToProps = ({currentUser, shows}) => ({currentUser, shows})
 function mapDispatchToProps(dispatch) {
     return {
         loginSuccess: (user) => dispatch(loginSuccess(user)),
+        getShows: () => dispatch(getShows()),
         createReview: (review) => dispatch(createReview(review))
     }
 }

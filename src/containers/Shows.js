@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import { Card, Image } from 'semantic-ui-react'
 import { getShows } from '../actions/showActions'
 import { loginSuccess } from '../actions/userActions'
+import { getReviews } from '../actions/reviewActions'
 import WithShows from '../components/WithShows'
 
 
@@ -46,7 +47,9 @@ const mapStateToProps = ({shows}) => ({shows})
 function mapDispatchToProps(dispatch) {
     return {
         getShows: () => dispatch(getShows()),
-        loginSuccess: (user) => dispatch(loginSuccess(user))
+        loginSuccess: (user) => dispatch(loginSuccess(user)),
+        getReviews: () => dispatch(getReviews())
+
     }
 }
 

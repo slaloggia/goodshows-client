@@ -7,6 +7,11 @@ export default function WithAuth(WrappedComponent) {
         // }
 
         componentDidMount() {
+            if(this.props.shows.length === 0) {
+                this.props.getShows()
+            };
+
+
             const token = localStorage.getItem('token')
 
             if(!token) {

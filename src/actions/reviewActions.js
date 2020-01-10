@@ -1,9 +1,16 @@
 import history from '../history'
 const REVIEWS_URL= 'http://localhost:3000/reviews'
 
+export function getReviews() {
+    return (dispatch) => {
+        fetch(REVIEWS_URL)
+        .then(resp => resp.json())
+        .then(reviews => dispatch({type: 'GET_REVIEWS', reviews}))
+    }
+}
+
 export function createReview(review) {
     return (dispatch) => {
-        console.log(review)
         const reqObj = {
             method: 'POST',
             headers: {
@@ -15,7 +22,9 @@ export function createReview(review) {
 
         fetch(REVIEWS_URL, reqObj)
         .then(resp => resp.json())
-        .then(newReview => console.log(newReview))
+        .then(newReview => 
+            dispatch({type: 'ADD_REVIEW', newReview})
+            )
         .then(() => history.push('/dashboard'))
     }
 }

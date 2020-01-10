@@ -5,12 +5,16 @@ import WithShows from '../components/WithShows'
 import { getShows } from '../actions/showActions'
 import { loginSuccess } from '../actions/userActions'
 
+
+const strftime = require('strftime')
+
 class ShowPage extends Component {
     
 
     findShow() {
         return this.props.shows.find(show => show.id === parseInt(this.props.match.params.id))
     }
+
 
     renderShowCard(show) {
         
@@ -33,20 +37,17 @@ class ShowPage extends Component {
     }
 
     renderReviews(show) {
-        if (show.reviews.length > 0) {
-        return show.reviews.map(review => <div className='show-review'>
+        if (show.reviews.length > 0){
+        return show.reviews.map(review => <div className='show-review' key={show.id}>
             <h5>{review.user.username}</h5>
-            <p>Date: {review.created_at}</p>
+            <p>Date: {strftime('%B %e, %Y', new Date(review.created_at))}</p>
             <p>{review.content}</p>
-            {console.log(review)}
-        </div>)
-        }
-
+        </div>)}
     }
 
     render() {
         const show = this.findShow()
-        const listOptions = [{text: 'Seen', value: 'Seen'}, {text: 'Want to See', value: 'Want to See'}]
+        const listOptions = [{text: 'Seen', value: true}, {text: 'Want to See', value: false}]
         return (
             this.props.shows.length === 0 ? <Placeholder.Header image/> :
         <Grid centered columns='two' id='show-detail-grid'>
@@ -73,7 +74,8 @@ const mapStateToProps = ({shows, currentUser}) => ({shows, currentUser})
 function mapDispatchToProps(dispatch) {
     return {
         getShows: () => dispatch(getShows()),
-        loginSuccess: (user) => dispatch(loginSuccess(user))
+        loginSuccess: (user) => dispatch(loginSuccess(user)),
+
     }
 }
 

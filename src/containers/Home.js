@@ -2,13 +2,12 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import CoverList from '../components/CoverList'
 import { getShows } from '../actions/showActions'
+import { getReviews } from '../actions/reviewActions'
+import WithShows from '../components/WithShows'
+
 
 class Home extends Component {
 
-    // state = {
-    //     showImages: [],
-    //     recentReviews: []
-    // }
 
     componentDidMount() {
         this.props.getShows()
@@ -29,8 +28,9 @@ class Home extends Component {
 const mapStateToProps = ({shows, reviews}) => ({shows, reviews})
 function mapDispatchToProps(dispatch) {
     return {
-        getShows: () => dispatch(getShows())
+        getShows: () => dispatch(getShows()),
+        getReviews: () => dispatch(getReviews())
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Home)
+export default connect(mapStateToProps, mapDispatchToProps)(WithShows(Home))
