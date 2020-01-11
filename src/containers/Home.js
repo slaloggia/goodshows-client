@@ -2,23 +2,17 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import CoverList from '../components/CoverList'
 import { getShows } from '../actions/showActions'
-import { getReviews } from '../actions/reviewActions'
+import { loginSuccess } from '../actions/userActions'
 import WithShows from '../components/WithShows'
 
 
 class Home extends Component {
 
-
-    componentDidMount() {
-        this.props.getShows()
-    }
-
-
-
     render() {
+        const popularShows = this.props.shows.sort((a, b) => a.reviews.length > b.reviews.length ? -1 : 1)
         return (
             <div className='home-container'>
-                <CoverList shows={this.props.shows.slice(0, 11)}/>
+                <CoverList shows={popularShows.slice(0, 11)}/>
             </div>
         )
     
@@ -29,7 +23,7 @@ const mapStateToProps = ({shows, reviews}) => ({shows, reviews})
 function mapDispatchToProps(dispatch) {
     return {
         getShows: () => dispatch(getShows()),
-        getReviews: () => dispatch(getReviews())
+        loginSuccess: (user) => dispatch(loginSuccess(user))
     }
 }
 

@@ -17,7 +17,7 @@ class Shows extends Component {
     displayShowImages() {
         const displayShows = this.filterShows()
         return displayShows.map(show => 
-        <Card   key={show.id}>
+        <Card   color='pink' key={show.id}>
             <Image src={show.image} id={show.id}/>
             <Card.Content>
                 <Card.Header>{show.title}</Card.Header>

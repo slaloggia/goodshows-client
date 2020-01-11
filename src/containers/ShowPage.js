@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { Grid, Rating, Card, Image, Placeholder, Form, Dropdown } from 'semantic-ui-react'
+import { Grid, Rating, Card, Image, Placeholder, Form, Dropdown, Item } from 'semantic-ui-react'
 import WithShows from '../components/WithShows'
 import { getShows, addToList } from '../actions/showActions'
 import { loginSuccess } from '../actions/userActions'
@@ -19,7 +19,7 @@ class ShowPage extends Component {
     renderShowCard(show) {
         
         return (
-        <Card   key={show.id}>
+        <Card   color='pink' key={show.id}>
             <Image src={show.image} id={show.id}/>
             <Card.Content>
                 <Card.Header>{show.title}</Card.Header>
@@ -28,7 +28,7 @@ class ShowPage extends Component {
                 </Card.Meta>
                 <Card.Description>
                     <h4>Average User Rating:</h4>
-                    <Rating defaultRating={0} rating={this.getRating(show)} maxRating={5} disabled/>
+                    <Rating rating={this.getRating(show)} maxRating={5} disabled/>
                 </Card.Description>
 
             </Card.Content>
@@ -39,18 +39,22 @@ class ShowPage extends Component {
 
     renderReviews(show) {
         if (show.reviews.length > 0){
-        return show.reviews.map(review => <div className='show-review' key={show.id}>
-            <h5>{review.user.username}</h5>
-            <p>Date: {strftime('%B %e, %Y', new Date(review.created_at))}</p>
-            <p>{review.content}</p>
-        </div>)}
+        return show.reviews.map(review => <Item  key={show.id}>
+            <Item.Content>
+                <Item.Header>{review.user.username}</Item.Header>
+                <Item.Meta>
+                    <span>{strftime('%B %e, %Y', new Date(review.created_at))}</span>
+                </Item.Meta>
+                <Item.Description>{review.content}</Item.Description>
+            </Item.Content>
+        </Item>)}
     }
 
     getRating(show) {
         if (show.reviews.length > 0) {
         const allRatings = show.reviews.map(review => parseInt(review.rating))
         return allRatings.reduce((total=0, num) => total + num ) / allRatings.length 
-        }
+        }else{return 0}
     }
 
     handleSelect = (event) => {
@@ -90,7 +94,9 @@ class ShowPage extends Component {
                 <Grid.Column width={8}>
                     <div className='reviews-container'>
                         <h2>User Reviews</h2>
+                        <Item.Group>
                         {this.renderReviews(show)}
+                        </Item.Group>
                     </div> 
                 </Grid.Column>
             </Grid.Row>

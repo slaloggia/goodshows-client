@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import WithAuth from '../components/WithAuth'
 import { loginSuccess } from '../actions/userActions'
 import { getShows } from '../actions/showActions'
+import { Item } from 'semantic-ui-react'
 
 class Dashboard extends Component {
 

@@ -24,27 +24,27 @@
   color: white;
 }
 
-.App-link {
-  color: #61dafb;
+.page-header {
+  background-color: ghostwhite
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.banner-img {
+  height: 110px;
+  width: 100%;
+  background-image: url('./images/posters.jpg');
+  opacity: 0.75;
 }
-
 
 .ui.inverted.menu {
-  background: #e1003d
+  background: #e1003d;
+  margin: 0px
 }
 
 .home-container {
   width: 75%;
-  margin-left: 10%
+  margin-left: 10%;
+  padding: 20px;
+  text-align: center
 }
 
 #login {
@@ -76,4 +76,17 @@
   background-color: ghostwhite;
   padding: 10px
 }
+
+.reviews-container {
+  background-color: darkgray;
+  padding: 5%;
+  border-radius: 20px;
+  max-height: 400px;
+  overflow-x: hidden;
+  overflow-y: auto
+}
+
+/* .coverflow__cover__25-7e {
+  border: 1px solid antiquewhite
+} */
 

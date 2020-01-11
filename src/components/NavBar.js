@@ -14,22 +14,25 @@ class NavBar extends Component {
 
     render() {
         return (
-            <Menu inverted>
-                <Menu.Item onClick={() => history.push('/')}>Home</Menu.Item>
-                <Menu.Item onClick={()=> history.push('/shows/Musical')}>Musicals</Menu.Item>
-                <Menu.Item onClick={()=> history.push('/shows/Play')}>Plays</Menu.Item>
-                <Menu.Item onClick={()=> history.push('/shows/Special')}>Specials</Menu.Item>
-                <Menu.Item onClick={()=> history.push('/shows/Concert')}>Concerts</Menu.Item>
+            <div className='page-header'>
+                <div className='banner-img'></div>
+                <Menu inverted>
+                    <Menu.Item onClick={() => history.push('/')}>Home</Menu.Item>
+                    <Menu.Item onClick={()=> history.push('/shows/Musical')}>Musicals</Menu.Item>
+                    <Menu.Item onClick={()=> history.push('/shows/Play')}>Plays</Menu.Item>
+                    <Menu.Item onClick={()=> history.push('/shows/Special')}>Specials</Menu.Item>
+                    <Menu.Item onClick={()=> history.push('/shows/Concert')}>Concerts</Menu.Item>
 
-                <Menu.Menu position='right'>
-                {this.props.currentUser.id ?
-                <Menu.Item onClick={() => history.push('/dashboard')}>Profile</Menu.Item> : null}
-                {this.props.currentUser.id ? 
-                <Menu.Item  onClick={this.handleLogout}>Log Out</Menu.Item> :
-                <Menu.Item  onClick ={() => history.push('/login')} >Log In</Menu.Item>}
-                </Menu.Menu>
+                    <Menu.Menu position='right'>
+                    {this.props.currentUser.id ?
+                    <Menu.Item onClick={() => history.push('/dashboard')}>Profile</Menu.Item> : null}
+                    {this.props.currentUser.id ? 
+                    <Menu.Item  onClick={this.handleLogout}>Log Out</Menu.Item> :
+                    <Menu.Item  onClick ={() => history.push('/login')} >Log In</Menu.Item>}
+                    </Menu.Menu>
 
-            </Menu>
+                </Menu>
+            </div>
         )
     }
 }

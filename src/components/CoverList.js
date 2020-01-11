@@ -1,6 +1,6 @@
 import React from 'react';
 import Coverflow from 'react-coverflow';
-// import history from '../history'
+import history from '../history'
 
 class CoverList extends React.Component {
 
@@ -8,17 +8,19 @@ class CoverList extends React.Component {
         active: 5
     }
 
-    // activeClick = (event) => {
-    //     console.log(event.target)
-    // }
 
-    setActive = (event) => {
-        console.log(event.target)
+    handleClick = (event) => {
+      console.log(event.target)
+      if (event.target.id === this.state.active)  {
+        history.push(`/show/${event.target.id}`)
+      }else{
+        this.setState({active: event.target.id})
+      }
     }
 
     listShows = () => {
        return this.props.shows.map(show => (
-        <img src={show.image} className='list-image' alt='playbill' id={show.id} key={show.id}  />
+        <img src={show.image} className='list-image' alt='playbill' id={show.id} key={show.id} onClick={this.handleClick} />
       ) )
     }
 
@@ -26,6 +28,7 @@ class CoverList extends React.Component {
   render() {
     return (
       <div>
+        <h2>Popular Shows</h2>
         <Coverflow
           width={480}
           height={500}
@@ -47,6 +50,7 @@ class CoverList extends React.Component {
             role="menuitem"
             tabIndex="0"
           >
+         
           </div >
           {this.listShows()}
 
