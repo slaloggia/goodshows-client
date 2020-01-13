@@ -49,7 +49,7 @@
 }
 
 .ui.cards {
-  padding: 10px
+  padding: 20px
 }
 
 .ui.images {
@@ -104,6 +104,10 @@
   padding: 20px
 }
 
+.shows-container {
+  padding: 20px
+}
+
 .review-link {
   color: #e1003d
 }
@@ -120,5 +124,10 @@
 
 #challenge-box {
   box-shadow: 5px 5px 5px grey;
+}
+
+.show-search {
+  margin-left: 75%;
+  width: 20%
 }
 
