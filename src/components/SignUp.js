@@ -32,10 +32,10 @@ class SignUp extends Component {
           if(data.error) {
             alert(data.error)
           } else {
-              console.log(data)
-            // localStorage.setItem('token', data.token)
-            // this.props.loginSuccess(data)
-            // this.props.history.push('/dashboard')
+            console.log(data)
+            localStorage.setItem('token', data.token)
+            this.props.loginSuccess(data)
+            this.props.history.push('/dashboard')
           }
         })
         
