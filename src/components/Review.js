@@ -34,7 +34,6 @@ class Review extends Component {
         <div className='review-form-container'>
             <Form  onSubmit={this.handleSubmit}>
                 <div>
-                    <h4>Your Rating:</h4>
                     <div>Rating: {rating}</div>
                         <input
                         type='range'
@@ -45,7 +44,7 @@ class Review extends Component {
                         onChange={this.handleChange}
                         />
                         <br />
-                        <Rating rating={this.state.rating} maxRating={5} />
+                        <Rating icon='star' rating={this.state.rating} maxRating={5} />
                 </div>
                 <Form.TextArea name='content' placeholder='Your review' value={this.state.content} onChange={this.handleChange} />
                 <Button type='submit'>Submit Review</Button>

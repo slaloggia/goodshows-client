@@ -9,6 +9,7 @@ import Dashboard from './containers/Dashboard'
 import ShowPage from './containers/ShowPage'
 import Shows from './containers/Shows'
 import Review from './components/Review'
+import SignUp from './components/SignUp'
 import history from './history';
 
 
@@ -24,6 +25,7 @@ function App() {
             <Route exact path='/show/:id' component={ShowPage} />
             <Route path='/show/:id/review' component={Review} />
             <Route path='/shows/:category' component={Shows} />
+            <Route exact path='/signup' component={SignUp} />
 
           </Switch>
       </Router>

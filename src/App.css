@@ -25,14 +25,15 @@
 }
 
 .page-header {
-  background-color: ghostwhite
+  background-color: lightgrey
 }
 
 .banner-img {
-  height: 110px;
-  width: 100%;
+  height: 120px;
+  width: 110%;
   background-image: url('./images/posters.jpg');
-  opacity: 0.75;
+  transform: skew(10deg);
+  opacity: 0.65;
 }
 
 .ui.inverted.menu {
@@ -47,8 +48,9 @@
   text-align: center
 }
 
-#login {
-  width: 30%
+#user-form {
+  width: 30%;
+  margin-left: 35%
 }
 
 .grid-container {
@@ -77,6 +79,7 @@
   padding: 10px
 }
 
+
 .reviews-container {
   background-color: darkgray;
   padding: 5%;
@@ -86,7 +89,7 @@
   overflow-y: auto
 }
 
-/* .coverflow__cover__25-7e {
-  border: 1px solid antiquewhite
-} */
+#user-dashboard-grid {
+  padding: 40px
+}
 

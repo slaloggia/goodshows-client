@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { Form, Button } from 'semantic-ui-react'
 import { connect } from 'react-redux'
-import { loginSuccess } from '../actions/userActions'
+import { loginSuccess, getUserInfo } from '../actions/userActions'
 
 class LogIn extends Component {
 
@@ -26,11 +26,10 @@ class LogIn extends Component {
           if(data.error) {
             alert('invalid credentials')
           } else {
-              console.log(data)
+            //   console.log(data)
             localStorage.setItem('token', data.token)
             this.props.loginSuccess(data)
             this.props.history.push('/dashboard')
-    
             // dispatch a action for succesful login
             // reroute to the about page
           }
@@ -46,7 +45,7 @@ class LogIn extends Component {
 
     render() {
         return (
-            <Form id='login' onSubmit={this.handleLogin}>
+            <Form id='user-form' onSubmit={this.handleLogin}>
                 <Form.Field>
                     <label>Username</label>
                     <input onChange={this.handleChange} placeholder='Username' name='username' value={this.state.username} />
@@ -63,7 +62,8 @@ class LogIn extends Component {
 
 function mapDispatchToProps(dispatch) {
     return {
-        loginSuccess: (user) => dispatch(loginSuccess(user))
+        loginSuccess: (user) => dispatch(loginSuccess(user)),
+        getUserInfo: (id) => dispatch(getUserInfo(id))
     }
 }
 

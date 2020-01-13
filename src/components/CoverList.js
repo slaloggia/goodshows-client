@@ -35,7 +35,6 @@ class CoverList extends React.Component {
           displayQuantityOfSide={2}
           navigation={false}
           enableHeading={false}
-          active={this.state.active}
           infiniteScroll={true}
         //   media={{
         //     '@media (max-width: 200px)': {

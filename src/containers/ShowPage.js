@@ -28,7 +28,7 @@ class ShowPage extends Component {
                 </Card.Meta>
                 <Card.Description>
                     <h4>Average User Rating:</h4>
-                    <Rating rating={this.getRating(show)} maxRating={5} disabled/>
+                    <Rating icon='star' rating={this.getRating(show)} maxRating={5} disabled/>
                 </Card.Description>
 
             </Card.Content>
@@ -42,6 +42,7 @@ class ShowPage extends Component {
         return show.reviews.map(review => <Item  key={show.id}>
             <Item.Content>
                 <Item.Header>{review.user.username}</Item.Header>
+                <Rating rating={review.rating} maxRating={5} disabled></Rating>
                 <Item.Meta>
                     <span>{strftime('%B %e, %Y', new Date(review.created_at))}</span>
                 </Item.Meta>
@@ -92,9 +93,9 @@ class ShowPage extends Component {
                     </Form> : null}
                 </Grid.Column>
                 <Grid.Column width={8}>
+                    <h2>User Reviews</h2>
                     <div className='reviews-container'>
-                        <h2>User Reviews</h2>
-                        <Item.Group>
+                        <Item.Group divided>
                         {this.renderReviews(show)}
                         </Item.Group>
                     </div> 

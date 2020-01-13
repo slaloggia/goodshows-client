@@ -7,10 +7,6 @@ export default function WithAuth(WrappedComponent) {
         // }
 
         componentDidMount() {
-            if(this.props.shows.length === 0) {
-                this.props.getShows()
-            };
-
 
             const token = localStorage.getItem('token')
 
@@ -33,9 +29,15 @@ export default function WithAuth(WrappedComponent) {
                         this.props.history.push('/login')
                     }else{
                         this.props.loginSuccess(data)
+                        this.props.getUserInfo(data.id)
                     }
                 })
             }
+            if(this.props.shows.length === 0) {
+                this.props.getShows()
+            };
+
+
         }
 
         render() {
