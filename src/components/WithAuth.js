@@ -2,9 +2,6 @@ import React from 'react'
 
 export default function WithAuth(WrappedComponent) {
     return class extends React.Component {
-        // constructor(props) {
-        //     super(props);
-        // }
 
         componentDidMount() {
 
@@ -28,7 +25,7 @@ export default function WithAuth(WrappedComponent) {
                     if(data.error) {
                         this.props.history.push('/login')
                     }else{
-                        this.props.loginSuccess(data)
+                        // this.props.loginSuccess(data)
                         this.props.getUserInfo(data.id)
                     }
                 })

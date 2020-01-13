@@ -12,10 +12,17 @@ export default function userReducer(state={
             }
         case 'GET_USER_INFO':
             return {
-                ...state,
+                id: action.user.id,
+                username: action.user.username,
                 since: action.user.created_at,
                 my_reviews: action.user.reviews,
                 my_shows: action.user.user_shows
+            }
+        case 'DELETE_REVIEW':
+            const reviews = state.my_reviews.filter(review => review.id !== action.id)
+            return {
+                ...state,
+                my_reviews: reviews
             }
         case 'LOGOUT_USER':
             return {}

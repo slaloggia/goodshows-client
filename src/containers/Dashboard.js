@@ -3,7 +3,8 @@ import { connect } from 'react-redux'
 import WithAuth from '../components/WithAuth'
 import { loginSuccess, getUserInfo } from '../actions/userActions'
 import { getShows } from '../actions/showActions'
-import { Item, Grid, Placeholder, Image, Rating, Card } from 'semantic-ui-react'
+import { deleteReview } from '../actions/reviewActions'
+import { Item, Grid, Placeholder, Image, Rating, Card, Button } from 'semantic-ui-react'
 
 const strftime = require('strftime')
 
@@ -12,7 +13,9 @@ class Dashboard extends Component {
 
     renderMyShows(status) {
         const listShows = this.props.currentUser.my_shows.filter(show => show.seen === status)
-        return listShows.map(showObj => <Image src={showObj.show.image} key={showObj.show.id}/>)
+        return listShows.map(showObj => 
+        <Image spaced  onClick={()=>this.props.history.push('/show/'+ showObj.show.id)} src={showObj.show.image} key={showObj.show.id} />
+      )
     }
 
     renderMyReviews() {
@@ -28,6 +31,10 @@ class Dashboard extends Component {
                     <span>{strftime('%B %e, %Y', new Date(review.created_at))}</span>
                 </Item.Meta>
                 <Item.Description>{review.content}</Item.Description>
+                <Item.Extra>
+                    <Button basic size='mini' onClick={()=>this.props.history.push(`/review/${review.id}/edit`)}>Edit</Button>
+                    <Button basic size='mini' onClick={() => this.props.deleteReview(review.id)}>Delete</Button>
+                </Item.Extra>
             </Item.Content>
         </Item>))}
     }
@@ -40,16 +47,15 @@ class Dashboard extends Component {
             <Grid relaxed  inverted centered columns='two' id='user-dashboard-grid'>
             <Grid.Row>
                 <Grid.Column width={4}>
-                    {/* user profile card */}
                     <Card id='user_card'>
                         <Card.Content>
                             <Card.Header>{user.username}</Card.Header>
                             <Card.Meta>Joined: {strftime('%B %Y', new Date(user.since))}</Card.Meta>
                             <br></br>
                             <Card.Description>
-                                <p>Seen: </p>
-                                <p>Want to See:</p>
-                                <p>Reviews:</p>
+                                <p>Seen: {this.props.currentUser.my_shows.filter(show => show.seen).length}</p>
+                                <p>Want to See: {this.props.currentUser.my_shows.filter(show => !show.seen).length}</p>
+                                <p>Reviews: {this.props.currentUser.my_reviews.length}</p>
                             </Card.Description>
                         </Card.Content>
                     </Card>
@@ -57,7 +63,7 @@ class Dashboard extends Component {
                 <Grid.Column width={10} divided='vertically'>
                     <Grid.Row>{/* seen list */}
                         <h3>Shows I Have Seen</h3>
-                        <Image.Group size='tiny'>
+                        <Image.Group size='small'>
                             {this.renderMyShows(true)}
                         </Image.Group>
                     </Grid.Row>
@@ -89,7 +95,8 @@ function mapDispatchToProps(dispatch) {
     return {
         loginSuccess: (user) => dispatch(loginSuccess(user)),
         getUserInfo: (id) => dispatch(getUserInfo(id)),
-        getShows: () => dispatch(getShows())
+        getShows: () => dispatch(getShows()),
+        deleteReview: (id) => dispatch(deleteReview(id))
     }
 }
 

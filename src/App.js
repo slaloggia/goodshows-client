@@ -26,6 +26,7 @@ function App() {
             <Route path='/show/:id/review' component={Review} />
             <Route path='/shows/:category' component={Shows} />
             <Route exact path='/signup' component={SignUp} />
+            <Route path='/review/:id/edit' component={Review} />
 
           </Switch>
       </Router>

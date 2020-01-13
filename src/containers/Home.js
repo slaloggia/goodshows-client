@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import CoverList from '../components/CoverList'
 import { getShows } from '../actions/showActions'
-import { loginSuccess } from '../actions/userActions'
+import { loginSuccess, getUserInfo } from '../actions/userActions'
 import WithShows from '../components/WithShows'
 
 
@@ -23,7 +23,8 @@ const mapStateToProps = ({shows, reviews}) => ({shows, reviews})
 function mapDispatchToProps(dispatch) {
     return {
         getShows: () => dispatch(getShows()),
-        loginSuccess: (user) => dispatch(loginSuccess(user))
+        loginSuccess: (user) => dispatch(loginSuccess(user)),
+        getUserInfo: (id) => dispatch(getUserInfo(id))
     }
 }
 

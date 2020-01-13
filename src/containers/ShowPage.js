@@ -1,25 +1,25 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { Grid, Rating, Card, Image, Placeholder, Form, Dropdown, Item } from 'semantic-ui-react'
+import { Grid, Rating, Card, Image, Placeholder, Form, Dropdown, Item, Button } from 'semantic-ui-react'
 import WithShows from '../components/WithShows'
 import { getShows, addToList } from '../actions/showActions'
-import { loginSuccess } from '../actions/userActions'
+import { loginSuccess, getUserInfo } from '../actions/userActions'
 
 
 const strftime = require('strftime')
 
 class ShowPage extends Component {
-    
 
     findShow() {
         return this.props.shows.find(show => show.id === parseInt(this.props.match.params.id))
     }
 
 
+
     renderShowCard(show) {
         
         return (
-        <Card   color='pink' key={show.id}>
+        <Card key={show.id}>
             <Image src={show.image} id={show.id}/>
             <Card.Content>
                 <Card.Header>{show.title}</Card.Header>
@@ -29,8 +29,9 @@ class ShowPage extends Component {
                 <Card.Description>
                     <h4>Average User Rating:</h4>
                     <Rating icon='star' rating={this.getRating(show)} maxRating={5} disabled/>
+                    {this.props.currentUser.id && this.props.currentUser.my_shows.find(usershow => usershow.show.id === show.id && usershow.seen) ? 
+                    <Button onClick={()=>this.props.history.push(`${this.props.match.url}/review`)}>Review</Button> : null}
                 </Card.Description>
-
             </Card.Content>
         </Card>
         )
@@ -60,6 +61,7 @@ class ShowPage extends Component {
 
     handleSelect = (event) => {
         event.preventDefault()
+        console.log(event.target)
         const choice = event.target.firstElementChild.innerText
         let seen
         if(this.props.currentUser.id) {
@@ -109,6 +111,7 @@ const mapStateToProps = ({shows, currentUser}) => ({shows, currentUser})
 function mapDispatchToProps(dispatch) {
     return {
         getShows: () => dispatch(getShows()),
+        getUserInfo: (id) => dispatch(getUserInfo(id)),
         loginSuccess: (user) => dispatch(loginSuccess(user)),
         addToList: (listItem) => dispatch(addToList(listItem))
 

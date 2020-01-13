@@ -26,7 +26,7 @@ export default function WithShows(WrappedComponent) {
                     if(data.error) {
                         this.props.history.push('/login')
                     }else{
-                        this.props.loginSuccess(data)
+                        this.props.getUserInfo(data.id)
                     }
                 })
             }
@@ -35,7 +35,6 @@ export default function WithShows(WrappedComponent) {
         
 
         render() {
-            // debugger
             return <WrappedComponent {...this.props}/>
         }
     }
