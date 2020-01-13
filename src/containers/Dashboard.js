@@ -5,6 +5,7 @@ import { loginSuccess, getUserInfo } from '../actions/userActions'
 import { getShows } from '../actions/showActions'
 import { deleteReview } from '../actions/reviewActions'
 import { Item, Grid, Placeholder, Image, Rating, Card, Button } from 'semantic-ui-react'
+import ChallengeBox from '../components/ChallengeBox'
 
 const strftime = require('strftime')
 
@@ -14,7 +15,7 @@ class Dashboard extends Component {
     renderMyShows(status) {
         const listShows = this.props.currentUser.my_shows.filter(show => show.seen === status)
         return listShows.map(showObj => 
-        <Image spaced  onClick={()=>this.props.history.push('/show/'+ showObj.show.id)} src={showObj.show.image} key={showObj.show.id} />
+        <Image spaced onClick={()=>this.props.history.push('/show/'+ showObj.show.id)} src={showObj.show.image} key={showObj.show.id} />
       )
     }
 
@@ -56,6 +57,8 @@ class Dashboard extends Component {
                                 <p>Seen: {this.props.currentUser.my_shows.filter(show => show.seen).length}</p>
                                 <p>Want to See: {this.props.currentUser.my_shows.filter(show => !show.seen).length}</p>
                                 <p>Reviews: {this.props.currentUser.my_reviews.length}</p>
+                                <br></br>
+                                <ChallengeBox shows={user.my_shows.filter(show => show.seen)} />
                             </Card.Description>
                         </Card.Content>
                     </Card>

@@ -29,8 +29,9 @@ class ShowPage extends Component {
                 <Card.Description>
                     <h4>Average User Rating:</h4>
                     <Rating icon='star' rating={this.getRating(show)} maxRating={5} disabled/>
+                    <br></br>
                     {this.props.currentUser.id && this.props.currentUser.my_shows.find(usershow => usershow.show.id === show.id && usershow.seen) ? 
-                    <Button onClick={()=>this.props.history.push(`${this.props.match.url}/review`)}>Review</Button> : null}
+                    <Button inverted id='review-btn' onClick={()=>this.props.history.push(`${this.props.match.url}/review`)}>Review It!</Button> : null}
                 </Card.Description>
             </Card.Content>
         </Card>
@@ -49,7 +50,9 @@ class ShowPage extends Component {
                 </Item.Meta>
                 <Item.Description>{review.content}</Item.Description>
             </Item.Content>
-        </Item>)}
+        </Item>)}else{
+            return <h2>No reviews yet</h2>
+        }
     }
 
     getRating(show) {
