@@ -23,7 +23,7 @@ export function addToList(show) {
         }
         fetch(USER_SHOWS_URL, reqObj)
         .then(resp => resp.json())
-        .then(data => console.log(data))
+        // .then(data => console.log(data))
         .then(() => history.push('/dashboard'))
     }
     

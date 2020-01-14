@@ -12,12 +12,10 @@ export const loginSuccess = (user) => {
 export function getUserInfo(id) {
     return (dispatch) => {
 
-    fetch(USERS_URL + id)
-    .then(resp => resp.json())
-    .then(user => dispatch({type: 'GET_USER_INFO', user}))
-    // .then(() => history.push('/dashboard'))
+        fetch(USERS_URL + id)
+        .then(resp => resp.json())
+        .then(user => dispatch(loginSuccess(user)))
     }
-
 }
 
 export const logoutUser= () => {

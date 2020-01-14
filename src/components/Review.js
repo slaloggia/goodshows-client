@@ -50,10 +50,10 @@ class Review extends Component {
         const rating= this.state.rating
         return (this.props.shows.length === 0 ? <Placeholder.Header image/> :
         <div className='review-form-container'>
-            <h2 className='review-title'>{this.props.shows.find(show => show.id === this.state.show_id).title}</h2>
+            <h2 >{this.props.shows.find(show => show.id === this.state.show_id).title}</h2>
             <Form  onSubmit={this.handleSubmit}>
                 <div>
-                    <div>Rating: {rating}</div>
+                    <div>Your Rating: {rating}</div>
                         <input
                         type='range'
                         min={0}

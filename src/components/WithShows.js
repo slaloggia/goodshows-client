@@ -7,6 +7,7 @@ export default function WithShows(WrappedComponent) {
             
             if(this.props.shows.length === 0) {
                 this.props.getShows()
+                this.props.getReviews()
                 
             };
             

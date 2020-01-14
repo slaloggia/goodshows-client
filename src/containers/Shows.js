@@ -4,7 +4,7 @@ import { Card, Image} from 'semantic-ui-react'
 import { getShows } from '../actions/showActions'
 import { loginSuccess, getUserInfo } from '../actions/userActions'
 import { getReviews } from '../actions/reviewActions'
-import WithShows from '../components/WithShows'
+// import WithShows from '../components/WithShows'
 
 
 class Shows extends Component {
@@ -61,7 +61,7 @@ const mapStateToProps = ({shows}) => ({shows})
 function mapDispatchToProps(dispatch) {
     return {
         getShows: () => dispatch(getShows()),
-        // loginSuccess: (user) => dispatch(loginSuccess(user)),
+        loginSuccess: (user) => dispatch(loginSuccess(user)),
         getReviews: () => dispatch(getReviews()),
         getUserInfo: (id) => dispatch(getUserInfo(id))
 
@@ -69,4 +69,4 @@ function mapDispatchToProps(dispatch) {
 }
 
 
-export default connect(mapStateToProps, mapDispatchToProps)(WithShows(Shows))
+export default connect(mapStateToProps, mapDispatchToProps)(Shows)

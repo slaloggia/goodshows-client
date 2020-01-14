@@ -1,20 +1,31 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Grid, Rating, Card, Image, Placeholder, Form, Dropdown, Item, Button } from 'semantic-ui-react'
-import WithShows from '../components/WithShows'
+// import WithShows from '../components/WithShows'
 import { getShows, addToList } from '../actions/showActions'
 import { loginSuccess, getUserInfo } from '../actions/userActions'
+import  { getReviews } from '../actions/reviewActions'
 
 
 const strftime = require('strftime')
 
 class ShowPage extends Component {
+    
 
     findShow() {
         return this.props.shows.find(show => show.id === parseInt(this.props.match.params.id))
     }
 
+    onList(show) {
+        if (this.props.currentUser.id) {
+          return this.props.currentUser.my_shows.find(usershow => usershow.show.id === show.id)
+        }
+    }
 
+    showSeen(show) {
+        const listShow = this.onList(show)
+      return listShow.seen
+    }
 
     renderShowCard(show) {
         
@@ -30,7 +41,7 @@ class ShowPage extends Component {
                     <h4>Average User Rating:</h4>
                     <Rating icon='star' rating={this.getRating(show)} maxRating={5} disabled/>
                     <br></br>
-                    {this.props.currentUser.id && this.props.currentUser.my_shows.find(usershow => usershow.show.id === show.id && usershow.seen) ? 
+                    {this.onList(show) && this.showSeen(show) ? 
                     <Button inverted id='review-btn' onClick={()=>this.props.history.push(`${this.props.match.url}/review`)}>Review It!</Button> : null}
                 </Card.Description>
             </Card.Content>
@@ -39,9 +50,9 @@ class ShowPage extends Component {
 
     }
 
-    renderReviews(show) {
-        if (show.reviews.length > 0){
-        return show.reviews.map(review => <Item  key={show.id}>
+    renderReviews(reviews) {
+        if (reviews.length > 0){
+        return reviews.map(review => <Item  key={review.id}>
             <Item.Content>
                 <Item.Header>{review.user.username}</Item.Header>
                 <Rating rating={review.rating} maxRating={5} disabled></Rating>
@@ -60,6 +71,10 @@ class ShowPage extends Component {
         const allRatings = show.reviews.map(review => parseInt(review.rating))
         return allRatings.reduce((total=0, num) => total + num ) / allRatings.length 
         }else{return 0}
+    }
+
+    findReviews(id) {
+      return  this.props.reviews.filter(review => review.show_id === id)
     }
 
     handleSelect = (event) => {
@@ -85,6 +100,7 @@ class ShowPage extends Component {
 
     render() {
         const show = this.findShow()
+        const reviews = this.findReviews(parseInt(this.props.match.params.id))
         const listOptions = [{text: 'Seen', value: true}, {text: 'Want to See', value: false}]
         return (
             this.props.shows.length === 0 ? <Placeholder.Header image/> :
@@ -94,14 +110,14 @@ class ShowPage extends Component {
                     {this.renderShowCard(show)}
                     {this.props.currentUser.id ? 
                     <Form inverted size={'large'} >
-                        <Dropdown placeholder='Add To Your List' selection options={listOptions}  onChange={this.handleSelect}/>
+                        <Dropdown placeholder='Add To Your List' selection options={listOptions}  onChange={this.handleSelect} />
                     </Form> : null}
                 </Grid.Column>
                 <Grid.Column width={8}>
                     <h2>User Reviews</h2>
                     <div className='reviews-container'>
                         <Item.Group divided>
-                        {this.renderReviews(show)}
+                        {this.renderReviews(reviews)}
                         </Item.Group>
                     </div> 
                 </Grid.Column>
@@ -110,10 +126,11 @@ class ShowPage extends Component {
         )
     }
 }
-const mapStateToProps = ({shows, currentUser}) => ({shows, currentUser})
+const mapStateToProps = ({shows, currentUser, reviews}) => ({shows, currentUser, reviews})
 function mapDispatchToProps(dispatch) {
     return {
         getShows: () => dispatch(getShows()),
+        getReviews: () => dispatch(getReviews()),
         getUserInfo: (id) => dispatch(getUserInfo(id)),
         loginSuccess: (user) => dispatch(loginSuccess(user)),
         addToList: (listItem) => dispatch(addToList(listItem))
@@ -121,4 +138,4 @@ function mapDispatchToProps(dispatch) {
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(WithShows(ShowPage))
+export default connect(mapStateToProps, mapDispatchToProps)(ShowPage)

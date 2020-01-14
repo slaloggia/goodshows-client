@@ -26,7 +26,7 @@
 }
 
 .ui.inverted.menu {
-  background: #e1003d;
+  background: #e1004b;
   margin: 0px
 }
 
@@ -74,7 +74,7 @@
 }
 
 #review-btn {
-  background-color: #e1003d
+  background-color: #e1004b
 }
 
 .review-form-container {
@@ -82,6 +82,7 @@
   margin-left: 25%;
   margin-top: 10%;
   background-color: ghostwhite;
+  color: black;
   padding: 10px
 }
 
@@ -109,7 +110,7 @@
 }
 
 .review-link {
-  color: #e1003d
+  color: #e1004b
 }
 
 .ui.image {
@@ -131,3 +132,8 @@
   width: 20%
 }
 
+#cover-flow {
+  margin-top: 5%;
+  background-color: #181e24;
+  border-radius: 25px
+}

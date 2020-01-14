@@ -1,7 +1,6 @@
 import React from 'react';
 import './App.css';
 import { Router, Route, Switch } from 'react-router-dom';
-// import {Container} from 'semantic-ui-react'
 import Home from './containers/Home'
 import NavBar from './components/NavBar'
 import LogIn from './components/LogIn'
@@ -10,7 +9,14 @@ import ShowPage from './containers/ShowPage'
 import Shows from './containers/Shows'
 import Review from './components/Review'
 import SignUp from './components/SignUp'
-import history from './history';
+import history from './history'
+import { connect } from 'react-redux'
+import WithShows from './components/WithShows'
+import { getShows } from './actions/showActions'
+import { getReviews } from './actions/reviewActions'
+import { loginSuccess, getUserInfo } from './actions/userActions'
+
+
 
 
 function App() {
@@ -34,4 +40,15 @@ function App() {
   );
 }
 
-export default App;
+const mapStateToProps = ({shows, currentUser, reviews}) => ({shows, currentUser, reviews})
+
+function mapDispatchToProps(dispatch) {
+  return {
+      getShows: () => dispatch(getShows()),
+      getUserInfo: (id) => dispatch(getUserInfo(id)),
+      loginSuccess: (user) => dispatch(loginSuccess(user)),
+      getReviews: () => dispatch(getReviews())
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(WithShows(App));

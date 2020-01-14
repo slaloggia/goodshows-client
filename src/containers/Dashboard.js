@@ -19,9 +19,11 @@ class Dashboard extends Component {
       )
     }
 
-    renderMyReviews() {
-        const reviews = this.props.currentUser.my_reviews
-        console.log(reviews)
+    findReviews() {
+        return this.props.reviews.filter(review => review.user_id === this.props.currentUser.id)
+    }
+
+    renderMyReviews(reviews) {
         if (reviews.length > 0){
         return reviews.map(review => (
         <Item  key={review.id}>
@@ -42,9 +44,11 @@ class Dashboard extends Component {
 
     render() {
         const user = this.props.currentUser
+        const reviews = this.findReviews()
+        // const my_shows = this.props.currentUser.my_shows
         return (
         
-            this.props.shows.length === 0 ? <Placeholder.Header image/> :
+            !this.props.currentUser.id ? <Placeholder.Header image/> :
             <Grid relaxed  inverted centered columns='two' id='user-dashboard-grid'>
             <Grid.Row>
                 <Grid.Column width={4}>
@@ -54,9 +58,9 @@ class Dashboard extends Component {
                             <Card.Meta>Joined: {strftime('%B %Y', new Date(user.since))}</Card.Meta>
                             <br></br>
                             <Card.Description>
-                                <p>Seen: {this.props.currentUser.my_shows.filter(show => show.seen).length}</p>
-                                <p>Want to See: {this.props.currentUser.my_shows.filter(show => !show.seen).length}</p>
-                                <p>Reviews: {this.props.currentUser.my_reviews.length}</p>
+                                <p>Seen: {this.props.currentUser.my_shows.length > 0 ? this.props.currentUser.my_shows.filter(show => show.seen).length : 0}</p>
+                                <p>Want to See: {this.props.currentUser.my_shows.length > 0 ? this.props.currentUser.my_shows.filter(show => !show.seen).length : 0}</p>
+                                <p>Reviews: {reviews.length}</p>
                                 <br></br>
                                 <ChallengeBox shows={user.my_shows.filter(show => show.seen)} />
                             </Card.Description>
@@ -80,7 +84,7 @@ class Dashboard extends Component {
                         <h3>My Reviews</h3>
                         <div className='reviews-container'>
                             <Item.Group divided>
-                            {this.renderMyReviews()}
+                            {this.renderMyReviews(reviews)}
                             </Item.Group>
                         </div> 
                     </Grid.Row>
@@ -93,7 +97,7 @@ class Dashboard extends Component {
 
 }
 
-const mapStateToProps = ({currentUser, shows}) => ({currentUser, shows})
+const mapStateToProps = ({currentUser, shows, reviews}) => ({currentUser, shows, reviews})
 function mapDispatchToProps(dispatch) {
     return {
         loginSuccess: (user) => dispatch(loginSuccess(user)),

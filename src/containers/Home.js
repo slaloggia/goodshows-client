@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import CoverList from '../components/CoverList'
 import { getShows } from '../actions/showActions'
 import { loginSuccess, getUserInfo } from '../actions/userActions'
-import WithShows from '../components/WithShows'
+// import WithShows from '../components/WithShows'
 
 
 class Home extends Component {
@@ -28,4 +28,4 @@ function mapDispatchToProps(dispatch) {
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(WithShows(Home))
+export default connect(mapStateToProps, mapDispatchToProps)(Home)

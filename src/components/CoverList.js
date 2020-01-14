@@ -27,8 +27,7 @@ class CoverList extends React.Component {
 
   render() {
     return (
-      <div>
-        <h2>Popular Shows</h2>
+      <div id='cover-flow'>
         <Coverflow
           width={480}
           height={500}
@@ -36,16 +35,9 @@ class CoverList extends React.Component {
           navigation={false}
           enableHeading={false}
           infiniteScroll={true}
-        //   media={{
-        //     '@media (max-width: 200px)': {
-        //       width: '200px',
-        //       height: '150px'
-        //     }
-        //   }}
         >
           <div
             onClick={this.setActive}
-            // onKeyDown={() => fn()}
             role="menuitem"
             tabIndex="0"
           >

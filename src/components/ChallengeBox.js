@@ -7,7 +7,7 @@ const ChallengeBox = (props) => {
         <Segment id='challenge-box'>
             <h3>20 Shows in 2020 Challenge!</h3>
             <p>{yearShows.length} of 20</p>
-            <Progress percent={yearShows.length/20} />
+            <Progress percent={(yearShows.length/20)*100} />
 
         </Segment>
     )

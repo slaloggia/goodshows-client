@@ -28,7 +28,7 @@ class LogIn extends Component {
           } else {
             //   console.log(data)
             localStorage.setItem('token', data.token)
-            this.props.loginSuccess(data)
+            this.props.getUserInfo(data.id)
             this.props.history.push('/dashboard')
             // dispatch a action for succesful login
             // reroute to the about page

@@ -43,7 +43,7 @@ export function updateReview(id, review) {
 
         fetch(REVIEWS_URL + id, reqObj)
         .then(resp => resp.json())
-        .then(updatedReview => console.log(updatedReview))
+        .then(updatedReview => dispatch({type: 'EDIT_REVIEW', updatedReview}))
         .then(() => history.push('/dashboard'))
     }
 }
