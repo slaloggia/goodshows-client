@@ -9,7 +9,7 @@ export default function WithAuth(WrappedComponent) {
 
             if(!token) {
                 this.props.history.push('/login')
-            }else{
+            }else if (token && !this.props.currentUser.loggedIn){
                 const reqObj = {
                     method: 'GET',
                     headers: {
@@ -30,9 +30,9 @@ export default function WithAuth(WrappedComponent) {
                     }
                 })
             }
-            if(this.props.shows.length === 0) {
-                this.props.getShows()
-            };
+            // if(this.props.shows.length === 0) {
+            //     this.props.getShows()
+            // };
 
 
         }

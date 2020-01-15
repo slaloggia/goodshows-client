@@ -22,7 +22,13 @@
   width: 110%;
   background-image: url('./images/posters.jpg');
   transform: skew(10deg);
-  opacity: 0.65;
+  /* opacity: 0.65; */
+  font-family: 'Diplomata';
+  text-align: center;
+  font-size: 60px;
+  color: black;
+  text-shadow: 10px 0px 30px rgb(247, 226, 108);
+
 }
 
 .ui.inverted.menu {
@@ -31,15 +37,16 @@
 }
 
 .home-container {
-  width: 75%;
-  margin-left: 10%;
+  width: 100%;
+  /* margin-left: 10%; */
   padding: 20px;
-  text-align: center
+  text-align: center;
 }
 
 #user-form {
   width: 30%;
-  margin-left: 35%
+  margin-left: 35%;
+  margin-top: 5%
 }
 
 .grid-container {
@@ -58,7 +65,8 @@
   border-radius: 20px;
   max-height: 500px;
   overflow-x: hidden;
-  overflow-y: auto
+  overflow-y: auto;
+  
 }
 
 .review-header {
@@ -118,7 +126,7 @@
 }
 
 #user_card {
-  margin-top: 5%;
+  margin-top: 2%;
   position: fixed;
   min-height: 300px
 }
@@ -134,6 +142,8 @@
 
 #cover-flow {
   margin-top: 5%;
-  background-color: #181e24;
-  border-radius: 25px
+  /* background-color: #181e24; */
+  border-radius: 25px;
+  width: 70%;
+  margin-left: 15%
 }

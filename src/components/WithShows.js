@@ -14,7 +14,7 @@ export default function WithShows(WrappedComponent) {
 
             const token = localStorage.getItem('token')
 
-            if(token) {
+            if(token && !this.props.currentUser.loggedIn) {
                 const reqObj = {
                     method: 'GET',
                     headers: {

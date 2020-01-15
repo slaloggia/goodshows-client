@@ -24,7 +24,24 @@ class ShowPage extends Component {
 
     showSeen(show) {
         const listShow = this.onList(show)
-      return listShow.seen
+        if (listShow) {
+            return listShow.seen
+        }
+    }
+
+    renderCreativeInfo(show) {
+        if (show.category === 'Musical') {
+
+            return <div>
+                 {show.music ? <h5>Music By: {show.music}</h5> : null} 
+                 {show.lyrics ? <h5>Lyrics By: {show.lyrics}</h5> : null}
+                 {show.book ? <h5>Book By: {show.book}</h5> : null}
+            </div>
+        }else if (show.category === 'Play') {
+            return <div>
+                {show.playwright ? <h5>Playwright: {show.playwright}</h5> : null}
+            </div>
+        }
     }
 
     renderShowCard(show) {
@@ -38,6 +55,7 @@ class ShowPage extends Component {
                     <span>{show.category}</span>
                 </Card.Meta>
                 <Card.Description>
+                    <div>{this.renderCreativeInfo(show)}</div>
                     <h4>Average User Rating:</h4>
                     <Rating icon='star' rating={this.getRating(show)} maxRating={5} disabled/>
                     <br></br>
@@ -66,14 +84,18 @@ class ShowPage extends Component {
         }
     }
 
-    getRating(show) {
-        if (show.reviews.length > 0) {
-        const allRatings = show.reviews.map(review => parseInt(review.rating))
+    getRating() {
+        const reviews = this.findReviews()
+        if (reviews.length > 0) {
+        const allRatings = reviews.map(review => parseInt(review.rating))
         return allRatings.reduce((total=0, num) => total + num ) / allRatings.length 
-        }else{return 0}
+        }else{ 
+            return 0 
+        }
     }
 
-    findReviews(id) {
+    findReviews() {
+        const id = parseInt(this.props.match.params.id)
       return  this.props.reviews.filter(review => review.show_id === id)
     }
 
@@ -100,7 +122,7 @@ class ShowPage extends Component {
 
     render() {
         const show = this.findShow()
-        const reviews = this.findReviews(parseInt(this.props.match.params.id))
+        const reviews = this.findReviews()
         const listOptions = [{text: 'Seen', value: true}, {text: 'Want to See', value: false}]
         return (
             this.props.shows.length === 0 ? <Placeholder.Header image/> :
@@ -110,7 +132,13 @@ class ShowPage extends Component {
                     {this.renderShowCard(show)}
                     {this.props.currentUser.id ? 
                     <Form inverted size={'large'} >
-                        <Dropdown placeholder='Add To Your List' selection options={listOptions}  onChange={this.handleSelect} />
+                        <Dropdown 
+                        placeholder='Add To Your List' 
+                        selection options={listOptions}  
+                        onChange={this.handleSelect} 
+                        defaultValue={
+                            this.props.currentUser.loggedIn ? this.showSeen(show) : null
+                        } />
                     </Form> : null}
                 </Grid.Column>
                 <Grid.Column width={8}>

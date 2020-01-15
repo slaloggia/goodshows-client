@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Form, Button } from 'semantic-ui-react'
+import { Form, Button} from 'semantic-ui-react'
 import { connect } from 'react-redux'
 import { loginSuccess, getUserInfo } from '../actions/userActions'
 
@@ -26,12 +26,9 @@ class LogIn extends Component {
           if(data.error) {
             alert('invalid credentials')
           } else {
-            //   console.log(data)
             localStorage.setItem('token', data.token)
             this.props.getUserInfo(data.id)
             this.props.history.push('/dashboard')
-            // dispatch a action for succesful login
-            // reroute to the about page
           }
         })
     }
@@ -46,6 +43,7 @@ class LogIn extends Component {
     render() {
         return (
             <Form id='user-form' onSubmit={this.handleLogin}>
+                <h2>Log In</h2>
                 <Form.Field>
                     <label>Username</label>
                     <input onChange={this.handleChange} placeholder='Username' name='username' value={this.state.username} />

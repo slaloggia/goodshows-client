@@ -6,6 +6,7 @@ import { getShows } from '../actions/showActions'
 import { deleteReview } from '../actions/reviewActions'
 import { Item, Grid, Placeholder, Image, Rating, Card, Button } from 'semantic-ui-react'
 import ChallengeBox from '../components/ChallengeBox'
+// import * from '../images/'
 
 const strftime = require('strftime')
 
@@ -53,6 +54,7 @@ class Dashboard extends Component {
             <Grid.Row>
                 <Grid.Column width={4}>
                     <Card id='user_card'>
+                        <Image src={user.avatar ? user.avatar : require('../images/default-user-icon.jpg')} size='small' />
                         <Card.Content>
                             <Card.Header>{user.username}</Card.Header>
                             <Card.Meta>Joined: {strftime('%B %Y', new Date(user.since))}</Card.Meta>
@@ -68,7 +70,7 @@ class Dashboard extends Component {
                     </Card>
                 </Grid.Column>
                 <Grid.Column width={10} divided='vertically'>
-                    <Grid.Row>{/* seen list */}
+                    <Grid.Row>
                         <h3>Shows I Have Seen</h3>
                         <Image.Group size='small'>
                             {this.renderMyShows(true)}

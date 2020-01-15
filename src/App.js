@@ -15,6 +15,7 @@ import WithShows from './components/WithShows'
 import { getShows } from './actions/showActions'
 import { getReviews } from './actions/reviewActions'
 import { loginSuccess, getUserInfo } from './actions/userActions'
+import EditProfile from './components/EditProfile';
 
 
 
@@ -33,6 +34,7 @@ function App() {
             <Route path='/shows/:category' component={Shows} />
             <Route exact path='/signup' component={SignUp} />
             <Route path='/review/:id/edit' component={Review} />
+            <Route path='/profile/edit' component={EditProfile} />
 
           </Switch>
       </Router>

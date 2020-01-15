@@ -4,7 +4,6 @@ import { Card, Image} from 'semantic-ui-react'
 import { getShows } from '../actions/showActions'
 import { loginSuccess, getUserInfo } from '../actions/userActions'
 import { getReviews } from '../actions/reviewActions'
-// import WithShows from '../components/WithShows'
 
 
 class Shows extends Component {

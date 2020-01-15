@@ -51,7 +51,7 @@ class SignUp extends Component {
 
     render() {
         return (
-            <Form id='user-form' onSubmit={this.handleSignUp}>
+            <Form id='user-form' onSubmit={this.handleSignUp} inverted>
                 <Form.Field>
                     <label>Username</label>
                     <input onChange={this.handleChange} placeholder='Username' name='username' value={this.state.username} />
