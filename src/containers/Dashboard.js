@@ -54,7 +54,7 @@ class Dashboard extends Component {
             <Grid.Row>
                 <Grid.Column width={4}>
                     <Card id='user_card'>
-                        <Image src={user.avatar ? user.avatar : require('../images/default-user-icon.jpg')} size='small' />
+                        <Image src={user.avatar ? user.avatar : require('../images/default-user-icon.jpg')} size='small'  />
                         <Card.Content>
                             <Card.Header>{user.username}</Card.Header>
                             <Card.Meta>Joined: {strftime('%B %Y', new Date(user.since))}</Card.Meta>

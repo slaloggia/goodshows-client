@@ -14,6 +14,12 @@ export default function userReducer(state={
             }
         case 'LOGOUT_USER':
             return {loggedIn: false}
+        case 'ADD_USER_SHOW':
+            const current_shows = state.my_shows
+            return {
+                ...state, 
+                my_shows: [...current_shows, action.data]
+            }
         default:
         return state
     }

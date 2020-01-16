@@ -2,8 +2,8 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Grid, Rating, Card, Image, Placeholder, Form, Dropdown, Item, Button } from 'semantic-ui-react'
 // import WithShows from '../components/WithShows'
-import { getShows, addToList } from '../actions/showActions'
-import { loginSuccess, getUserInfo } from '../actions/userActions'
+import { getShows } from '../actions/showActions'
+import { loginSuccess, getUserInfo, addToList } from '../actions/userActions'
 import  { getReviews } from '../actions/reviewActions'
 
 
@@ -30,18 +30,12 @@ class ShowPage extends Component {
     }
 
     renderCreativeInfo(show) {
-        if (show.category === 'Musical') {
-
             return <div>
-                 {show.music ? <h5>Music By: {show.music}</h5> : null} 
-                 {show.lyrics ? <h5>Lyrics By: {show.lyrics}</h5> : null}
-                 {show.book ? <h5>Book By: {show.book}</h5> : null}
+                 {show.creatives.music ? <h5>Music By: {show.creatives.music}</h5> : null} 
+                 {show.creatives.lyrics ? <h5>Lyrics By: {show.creatives.lyrics}</h5> : null}
+                 {show.creatives.book ? <h5>Book By: {show.creatives.book}</h5> : null}
+                 {show.creatives.playwright ? <h5>Playwright: {show.creatives.playwright}</h5> : null}
             </div>
-        }else if (show.category === 'Play') {
-            return <div>
-                {show.playwright ? <h5>Playwright: {show.playwright}</h5> : null}
-            </div>
-        }
     }
 
     renderShowCard(show) {
@@ -71,6 +65,7 @@ class ShowPage extends Component {
     renderReviews(reviews) {
         if (reviews.length > 0){
         return reviews.map(review => <Item  key={review.id}>
+            <Item.Image src={review.user.avatar ? review.user.avatar : require('../images/default-user-icon.jpg')} avatar size='mini' />
             <Item.Content>
                 <Item.Header>{review.user.username}</Item.Header>
                 <Rating rating={review.rating} maxRating={5} disabled></Rating>
