@@ -1,5 +1,5 @@
 import history from '../history'
-const REVIEWS_URL= 'http://localhost:3000/reviews/'
+const REVIEWS_URL= 'https://intense-wildwood-13749.herokuapp.com/reviews/'
 
 export function getReviews() {
     return (dispatch) => {
@@ -29,9 +29,9 @@ export function createReview(review) {
     }
 }
 
-export function updateReview(id, review) {
-    console.log(id)
+export function updateReview(review) {
     return (dispatch) => {
+        const id = review.review_id
         const reqObj = {
             method: 'PATCH',
             headers: {

@@ -20,6 +20,11 @@ export default function userReducer(state={
                 ...state, 
                 my_shows: [...current_shows, action.data]
             }
+        case 'UPDATE_PROFILE_PIC':
+            return {
+                ...state,
+                avatar: action.data.avatar
+            }
         default:
         return state
     }

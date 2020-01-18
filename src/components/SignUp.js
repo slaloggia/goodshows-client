@@ -26,7 +26,7 @@ class SignUp extends Component {
             )
         }
     
-        fetch('http://localhost:3000/users', reqObj)
+        fetch('https://intense-wildwood-13749.herokuapp.com/users', reqObj)
         .then(resp => resp.json())
         .then(data =>  {
           if(data.error) {
@@ -34,7 +34,7 @@ class SignUp extends Component {
           } else {
             console.log(data)
             localStorage.setItem('token', data.token)
-            this.props.loginSuccess(data)
+            this.props.getUserInfo(data)
             this.props.history.push('/dashboard')
           }
         })

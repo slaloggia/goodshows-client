@@ -8,8 +8,10 @@ import { Form, Rating, Button, Placeholder } from 'semantic-ui-react'
 
 class Review extends Component {
     state= {
-        show_id: parseInt(this.props.match.params.id),
-        rating_id: '',
+        review_id: "",
+        user_id: this.props.currentUser.id,
+        show_id: this.props.showId,
+        // rating_id: '',
         rating: 0,
         content: '' 
     }
@@ -18,30 +20,17 @@ class Review extends Component {
         this.setState({[event.target.name]: event.target.value})
     }
 
-    handleSubmit = (event) => {
-        event.preventDefault()
-        
-        const review= {
-            ...this.state,
-            rating: parseInt(this.state.rating),
-            user_id: this.props.currentUser.id
-        }
-        console.log(review)
-        if (this.props.match.path === '/review/:id/edit') {
-            this.props.updateReview(this.state.rating_id, review)
-        }else{this.props.createReview(review)}
-    }
-
     componentDidMount() {
-        if (this.props.match.path === '/review/:id/edit') {
-            fetch(`http://localhost:3000/reviews/${this.props.match.params.id}`)
-            .then(resp => resp.json())
-            .then(review => this.setState({
+        if (this.props.review) {
+            const review = this.props.review
+            this.setState({
+                review_id: review.id,
+                user_id: review.user_id,
                 show_id: review.show_id,
-                rating_id: parseInt(this.props.match.params.id),
                 rating: review.rating,
                 content: review.content
-            }))
+            })
+            console.log(this.props.review)
         }
     }
 
@@ -50,8 +39,8 @@ class Review extends Component {
         const rating= this.state.rating
         return (this.props.shows.length === 0 ? <Placeholder.Header image/> :
         <div className='review-form-container'>
-            <h2 >{this.props.shows.find(show => show.id === this.state.show_id).title}</h2>
-            <Form  onSubmit={this.handleSubmit}>
+            <h2 >{this.props.showTitle}</h2>
+            <Form  onSubmit={()=>this.props.onSubmit(this.state)} >
                 <div>
                     <div>Your Rating: {rating}</div>
                         <input
@@ -66,9 +55,7 @@ class Review extends Component {
                         <Rating icon='star' rating={this.state.rating} maxRating={5} />
                 </div>
                 <Form.TextArea name='content' placeholder='Your review' value={this.state.content} onChange={this.handleChange} />
-                {this.props.match.path === '/review/:id/edit' ? 
-                <Button type='submit'>Update Review</Button> :
-                <Button type='submit'>Submit Review</Button>}
+                <Button type='submit'>Submit</Button>
             </Form>
         </div>
         )
@@ -83,7 +70,7 @@ function mapDispatchToProps(dispatch) {
         getUserInfo: (id) => dispatch(getUserInfo(id)),
         getShows: () => dispatch(getShows()),
         createReview: (review) => dispatch(createReview(review)),
-        updateReview: (id, review) => dispatch(updateReview(id, review))
+        updateReview: (review) => dispatch(updateReview(review))
     }
 }
 

@@ -1,12 +1,13 @@
 import React, { Component } from 'react'
 import WithAuth from '../components/WithAuth'
-import { Form, Button } from 'semantic-ui-react'
+import { Form, Button, Modal } from 'semantic-ui-react'
 import { connect } from 'react-redux'
-import { loginSuccess, getUserInfo } from '../actions/userActions'
+import { loginSuccess, getUserInfo, updateProfile } from '../actions/userActions'
 
 class EditProfile extends Component {
     state= {
-        avatar: null
+        avatar: null, 
+        open: false
     }
 
     handleChange = (event) => {
@@ -15,38 +16,40 @@ class EditProfile extends Component {
         })
     }
 
-    handleUpdateProfile = (event) => {
-        event.preventDefault()
-        const data = new FormData()
-        data.append('user[avatar]', this.state.avatar)
-
-        const reqObj = {
-            method: 'PATCH',
-            body: data
-        }
-
-        fetch('http://localhost:3000/users/'+this.props.currentUser.id, reqObj)
-        .then(resp => resp.json())
-        .then(data => console.log(data))
+    handleModalChange = () => {
+        this.setState({open: !this.state.open})
     }
+
+    handleSubmitForm = (event) => {
+        event.preventDefault()
+        this.setState({open: false})
+        this.props.updateProfile(event, this.state.avatar)
+    }
+
 
     render() {
         return (
-            <div>
-                <Form id='user-form' onSubmit={this.handleUpdateProfile} inverted>
-                    <h2>Upload a profile image</h2>
-                    <input type='file' onChange={this.handleChange}/> 
-                    <Button type='submit'>Save Image</Button>
-                </Form>
-            </div>
-        )
+        <div>
+            <Button  onClick={this.handleModalChange} basic compact fluid>Add or Change Profile Picture</Button>
+            <Modal open={this.state.open}>
+                <div>
+                    <Form id='user-form' data-id={this.props.currentUser.id} onSubmit={this.handleSubmitForm} >
+                        <h2>Upload a profile image</h2>
+                        <input type='file' onChange={this.handleChange}/> 
+                        <Button type='submit'>Save Image</Button>
+                    </Form>
+                </div>
+            </Modal>
+        </div>
+    )
     }
 }
 
 function mapDispatchToProps(dispatch) {
     return {
         loginSuccess: (user) => dispatch(loginSuccess(user)),
-        getUserInfo: (id) => dispatch(getUserInfo(id))
+        getUserInfo: (id) => dispatch(getUserInfo(id)),
+        updateProfile: (event, avatar) => dispatch(updateProfile(event, avatar))
     }
 }
 

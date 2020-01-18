@@ -15,8 +15,8 @@ class NavBar extends Component {
     render() {
         return (
             <div className='page-header'>
-                <div className='banner-img'><br/><br/>GoodShows!</div>
-                <Menu inverted>
+                <div className='banner-img'><br/><br/><br></br>GoodShows!</div>
+                <Menu inverted size='large'>
                     <Menu.Item onClick={() => history.push('/')}>Home</Menu.Item>
                     <Menu.Item onClick={()=> history.push('/shows/Musical')}>Musicals</Menu.Item>
                     <Menu.Item onClick={()=> history.push('/shows/Play')}>Plays</Menu.Item>

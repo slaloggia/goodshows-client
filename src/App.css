@@ -18,10 +18,11 @@
 }
 
 .banner-img {
-  height: 120px;
-  width: 110%;
-  background-image: url('./images/posters.jpg');
-  transform: skew(10deg);
+  height: 150px;
+  /* width: 100%; */
+  background-image: url('./images/broadway3.jpg');
+  background-position: center;
+  background-size: 100%;
   /* opacity: 0.65; */
   font-family: 'Diplomata';
   text-align: center;
@@ -44,9 +45,14 @@
 }
 
 #user-form {
-  width: 30%;
+  padding: 20px;
+  width: 50%;
   margin-left: 35%;
-  margin-top: 5%
+  color: black
+}
+
+.header.review-header {
+  width: 25%
 }
 
 .grid-container {

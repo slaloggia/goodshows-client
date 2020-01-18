@@ -18,22 +18,16 @@ export default function WithAuth(WrappedComponent) {
                     }
                 }
 
-                fetch('http://localhost:3000/api/v1/current_user', reqObj)
+                fetch('https://intense-wildwood-13749.herokuapp.com/api/v1/current_user', reqObj)
                 .then(resp => resp.json())
                 .then(data => {
-                    // console.log('***', data)
                     if(data.error) {
                         this.props.history.push('/login')
                     }else{
-                        // this.props.loginSuccess(data)
                         this.props.getUserInfo(data.id)
                     }
                 })
             }
-            // if(this.props.shows.length === 0) {
-            //     this.props.getShows()
-            // };
-
 
         }
 

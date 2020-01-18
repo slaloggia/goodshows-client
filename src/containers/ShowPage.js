@@ -1,17 +1,15 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { Grid, Rating, Card, Image, Placeholder, Form, Dropdown, Item, Button } from 'semantic-ui-react'
+import { Grid, Rating, Card, Image, Placeholder, Form, Dropdown, Item, Button, Modal } from 'semantic-ui-react'
 // import WithShows from '../components/WithShows'
 import { getShows } from '../actions/showActions'
 import { loginSuccess, getUserInfo, addToList } from '../actions/userActions'
-import  { getReviews } from '../actions/reviewActions'
-
+import  { getReviews, createReview } from '../actions/reviewActions'
+import Review from '../components/Review'
 
 const strftime = require('strftime')
 
 class ShowPage extends Component {
-    
-
     findShow() {
         return this.props.shows.find(show => show.id === parseInt(this.props.match.params.id))
     }
@@ -38,6 +36,10 @@ class ShowPage extends Component {
             </div>
     }
 
+    handleModalOpen() {
+        this.setState({modalOpen: !this.state.modalOpen})
+    }
+
     renderShowCard(show) {
         
         return (
@@ -54,7 +56,12 @@ class ShowPage extends Component {
                     <Rating icon='star' rating={this.getRating(show)} maxRating={5} disabled/>
                     <br></br>
                     {this.onList(show) && this.showSeen(show) ? 
-                    <Button inverted id='review-btn' onClick={()=>this.props.history.push(`${this.props.match.url}/review`)}>Review It!</Button> : null}
+                    <div>                       
+                        <Modal trigger={<Button inverted id='review-btn' >Review It!</Button>} >
+                            <Review showId={show.id} showTitle={show.title} match={this.props.match} onSubmit={(review) => this.props.createReview(review)} />
+                        </Modal>
+                    </div>
+                    : null}
                 </Card.Description>
             </Card.Content>
         </Card>
@@ -67,7 +74,7 @@ class ShowPage extends Component {
         return reviews.map(review => <Item  key={review.id}>
             <Item.Image src={review.user.avatar ? review.user.avatar : require('../images/default-user-icon.jpg')} avatar size='mini' />
             <Item.Content>
-                <Item.Header>{review.user.username}</Item.Header>
+                <Item.Header>{review.user.username}</Item.Header><br></br>
                 <Rating rating={review.rating} maxRating={5} disabled></Rating>
                 <Item.Meta>
                     <span>{strftime('%B %e, %Y', new Date(review.created_at))}</span>
@@ -156,8 +163,8 @@ function mapDispatchToProps(dispatch) {
         getReviews: () => dispatch(getReviews()),
         getUserInfo: (id) => dispatch(getUserInfo(id)),
         loginSuccess: (user) => dispatch(loginSuccess(user)),
-        addToList: (listItem) => dispatch(addToList(listItem))
-
+        addToList: (listItem) => dispatch(addToList(listItem)),
+        createReview: (review) => dispatch(createReview(review))
     }
 }
 

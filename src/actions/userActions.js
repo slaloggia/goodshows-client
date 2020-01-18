@@ -1,6 +1,6 @@
 import history from '../history';
-const USERS_URL = 'http://localhost:3000/users/'
-const USER_SHOWS_URL = 'http://localhost:3000/user_shows'
+const USERS_URL = 'https://intense-wildwood-13749.herokuapp.com/users/'
+const USER_SHOWS_URL = 'https://intense-wildwood-13749.herokuapp.com/user_shows'
 
 
 
@@ -40,5 +40,22 @@ export function addToList(show) {
         .then(resp => resp.json())
         .then(data => dispatch({type: 'ADD_USER_SHOW', data}))
         .then(() => history.push('/dashboard'))
+    }
+}
+
+export function updateProfile(event, avatar) {
+    const userId = event.target.dataset.id
+    return (dispatch) =>{
+        const data = new FormData()
+        data.append('user[avatar]', avatar)
+
+        const reqObj = {
+            method: 'PATCH',
+            body: data
+        }
+
+        fetch(USERS_URL + userId, reqObj)
+        .then(resp => resp.json())
+        .then(data => dispatch({type: 'UPDATE_PROFILE_PIC', data}))
     }
 }
