@@ -10,7 +10,6 @@ class CoverList extends React.Component {
 
 
     handleClick = (event) => {
-      console.log(event.target)
       if (event.target.id === this.state.active)  {
         history.push(`/show/${event.target.id}`)
       }else{

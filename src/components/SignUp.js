@@ -26,13 +26,12 @@ class SignUp extends Component {
             )
         }
     
-        fetch('http://localhost:5000/users', reqObj)
+        fetch('https://good-shows-api.herokuapp.com/users', reqObj)
         .then(resp => resp.json())
         .then(data =>  {
           if(data.error) {
             alert(data.error)
           } else {
-            console.log(data)
             localStorage.setItem('token', data.token)
             this.props.getUserInfo(data)
             this.props.history.push('/dashboard')

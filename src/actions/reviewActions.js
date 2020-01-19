@@ -1,5 +1,5 @@
 import history from '../history'
-const REVIEWS_URL= 'http://localhost:5000/reviews/'
+const REVIEWS_URL= 'https://good-shows-api.herokuapp.com/reviews/'
 
 export function getReviews() {
     return (dispatch) => {

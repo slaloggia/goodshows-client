@@ -37,7 +37,6 @@ class Shows extends Component {
     }
 
     handleImageClick = (event) => {
-        console.log(event.target)
         if (event.target.className === 'ui image') {
             this.props.history.push(`/show/${event.target.id}`)
         }

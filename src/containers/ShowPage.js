@@ -103,7 +103,6 @@ class ShowPage extends Component {
 
     handleSelect = (event) => {
         event.preventDefault()
-        console.log(event.target)
         const choice = event.target.firstElementChild.innerText
         let seen
         if(this.props.currentUser.id) {

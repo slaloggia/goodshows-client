@@ -30,7 +30,6 @@ class Review extends Component {
                 rating: review.rating,
                 content: review.content
             })
-            console.log(this.props.review)
         }
     }
 

@@ -23,7 +23,7 @@ export default function WithShows(WrappedComponent) {
                     }
                 }
 
-                fetch('http://localhost:5000/api/v1/current_user', reqObj)
+                fetch('https://good-shows-api.herokuapp.com/api/v1/current_user', reqObj)
                 .then(resp => resp.json())
                 .then(data => {
                     if(data.error) {
