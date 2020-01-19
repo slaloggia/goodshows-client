@@ -25,7 +25,7 @@ export function createReview(review) {
         .then(newReview => 
             dispatch({type: 'ADD_REVIEW', newReview})
             )
-        .then(() => history.push('/dashboard'))
+        .then(() => history.push(`/user/${review.user_id}/dashboard`))
     }
 }
 
@@ -53,6 +53,6 @@ export function deleteReview(id) {
         fetch(REVIEWS_URL + id, {method: 'DELETE'})
         .then(resp => resp.json())
         .then(deletedReview => dispatch({type: 'DELETE_REVIEW', id: deletedReview.id}))
-        .then(() => history.push('/dashboard'))
+        .then(() => history.push(`/user/${review.user_id}/dashboard`))
     }
 }

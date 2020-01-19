@@ -28,7 +28,7 @@ class LogIn extends Component {
           } else {
             localStorage.setItem('token', data.token)
             this.props.getUserInfo(data.id)
-            this.props.history.push('/dashboard')
+            this.props.history.push(`/user/${data.id}/dashboard`)
           }
         })
     }
