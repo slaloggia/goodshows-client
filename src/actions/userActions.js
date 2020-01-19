@@ -39,7 +39,7 @@ export function addToList(show) {
         fetch(USER_SHOWS_URL, reqObj)
         .then(resp => resp.json())
         .then(data => dispatch({type: 'ADD_USER_SHOW', data}))
-        .then((data) => history.push(`/user/${data.user_id}/dashboard`))
+        .then((data) => history.push(`/dashboard`))
     }
 }
 
