@@ -25,7 +25,7 @@ class NavBar extends Component {
 
                     <Menu.Menu position='right'>
                     {this.props.currentUser.id ?
-                    <Menu.Item onClick={() => history.push('/dashboard')}>Profile</Menu.Item> : 
+                    <Menu.Item onClick={() => history.push(`/user/${this.props.currentUser.id}/dashboard`)}>Profile</Menu.Item> : 
                     <Menu.Item onClick={() => history.push('/signup')}>Sign Up</Menu.Item>}
                     {this.props.currentUser.id ? 
                     <Menu.Item  onClick={this.handleLogout}>Log Out</Menu.Item> :

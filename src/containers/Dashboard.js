@@ -14,10 +14,6 @@ const strftime = require('strftime')
 
 class Dashboard extends Component {
 
-    state={
-        open: false
-    }
-    
 
     renderMyShows(status) {
         const listShows = this.props.currentUser.my_shows.filter(show => show.seen === status)
@@ -28,6 +24,11 @@ class Dashboard extends Component {
 
     findReviews() {
         return this.props.reviews.filter(review => review.user_id === this.props.currentUser.id)
+    }
+
+    submitUpdatedReview(review) {
+        this.props.updateReview(review)
+        window.location.reload(true)
     }
 
 
@@ -44,9 +45,8 @@ class Dashboard extends Component {
                 <Item.Description>{review.content}</Item.Description>
                 <Item.Extra>
                     <Modal trigger={<Button basic size='mini' >Edit</Button>} >
-                        <Review match={this.props.match} showTitle={review.show.title} showId={review.show.id} review={review} onSubmit={(review)=>this.props.updateReview(review)}/>
+                        <Review match={this.props.match} showTitle={review.show.title} showId={review.show.id} review={review} onSubmit={(review)=>this.submitUpdatedReview(review)}/>
                     </Modal>
-                    {/* <Button basic size='mini' onClick={()=>this.props.history.push(`/review/${review.id}/edit`)}>Edit</Button> */}
                     <Button basic size='mini' onClick={() => this.props.deleteReview(review.id)}>Delete</Button>
                 </Item.Extra>
             </Item.Content>
