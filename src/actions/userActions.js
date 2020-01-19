@@ -1,6 +1,6 @@
 import history from '../history';
-const USERS_URL = 'https://intense-wildwood-13749.herokuapp.com/users/'
-const USER_SHOWS_URL = 'https://intense-wildwood-13749.herokuapp.com/user_shows'
+const USERS_URL = 'https://good-shows-api.herokuapp.com/users/'
+const USER_SHOWS_URL = 'https://good-shows-api.herokuapp.com/user_shows'
 
 
 

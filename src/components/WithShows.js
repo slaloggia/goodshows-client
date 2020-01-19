@@ -23,7 +23,7 @@ export default function WithShows(WrappedComponent) {
                     }
                 }
 
-                fetch('https://intense-wildwood-13749.herokuapp.com/api/v1/current_user', reqObj)
+                fetch('https://good-shows-api.herokuapp.com/api/v1/current_user', reqObj)
                 .then(resp => resp.json())
                 .then(data => {
                     if(data.error) {

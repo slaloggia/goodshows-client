@@ -1,6 +1,6 @@
 // import history from '../history';
 
-const SHOWS_URL = 'https://intense-wildwood-13749.herokuapp.com/shows'
+const SHOWS_URL = 'https://good-shows-api.herokuapp.com/shows'
 
 export function getShows() {
     return (dispatch) => {

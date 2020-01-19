@@ -20,7 +20,7 @@ class LogIn extends Component {
           body: JSON.stringify(this.state)
         }
     
-        fetch('https://intense-wildwood-13749.herokuapp.com/api/v1/auth', reqObj)
+        fetch('https://good-shows-api.herokuapp.com/api/v1/auth', reqObj)
         .then(resp => resp.json())
         .then(data =>  {
           if(data.error) {
