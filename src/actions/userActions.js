@@ -1,6 +1,6 @@
 import history from '../history';
-const USERS_URL = 'https://good-shows-api.herokuapp.com/users/'
-const USER_SHOWS_URL = 'https://good-shows-api.herokuapp.com/user_shows'
+const USERS_URL = 'http://localhost:5000/users/'
+const USER_SHOWS_URL = 'http://localhost:5000/user_shows'
 
 
 

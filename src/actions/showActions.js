@@ -1,6 +1,6 @@
 // import history from '../history';
 
-const SHOWS_URL = 'https://good-shows-api.herokuapp.com/shows'
+const SHOWS_URL = 'http://localhost:5000/shows'
 
 export function getShows() {
     return (dispatch) => {

@@ -26,7 +26,7 @@ class SignUp extends Component {
             )
         }
     
-        fetch('https://good-shows-api.herokuapp.com/users', reqObj)
+        fetch('http://localhost:5000/users', reqObj)
         .then(resp => resp.json())
         .then(data =>  {
           if(data.error) {
