@@ -53,6 +53,7 @@ class LogIn extends Component {
                     <input onChange={this.handleChange} type ='password' placeholder='password' name='password' value={this.state.password} />
                 </Form.Field>
                 <Button type='submit'>Log In</Button>
+            
             </Form>
         )
     }

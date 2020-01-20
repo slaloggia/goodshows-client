@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 import { connect } from 'react-redux'
-import { Menu } from 'semantic-ui-react'
+import { Menu, Image, Dropdown } from 'semantic-ui-react'
 import history from '../history'
 import { logoutUser } from '../actions/userActions'
 
@@ -16,7 +16,7 @@ class NavBar extends Component {
         return (
             <div className='page-header'>
                 <div className='banner-img'><br/><br/><br></br>GoodShows!</div>
-                <Menu inverted size='large'>
+                <Menu inverted size='large' fitted='vertically'>
                     <Menu.Item onClick={() => history.push('/')}>Home</Menu.Item>
                     <Menu.Item onClick={()=> history.push('/shows')}>All Shows</Menu.Item>
                     <Menu.Item onClick={()=> history.push('/shows/Musical')}>Musicals</Menu.Item>
@@ -25,10 +25,15 @@ class NavBar extends Component {
 
                     <Menu.Menu position='right'>
                     {this.props.currentUser.id ?
-                    <Menu.Item onClick={() => history.push(`/dashboard`)}>Profile</Menu.Item> : 
+                    <Menu.Item >
+                        <Image src={this.props.currentUser.avatar || require('../images/default-user-icon.jpg')} avatar/>
+                        <Dropdown options={[
+                            <Menu.Item  onClick={() => history.push(`/dashboard`)}>Profile</Menu.Item>,
+                            <Menu.Item  onClick={this.handleLogout}>Log Out</Menu.Item> 
+                        ]}/>
+                    </Menu.Item> : 
                     <Menu.Item onClick={() => history.push('/signup')}>Sign Up</Menu.Item>}
-                    {this.props.currentUser.id ? 
-                    <Menu.Item  onClick={this.handleLogout}>Log Out</Menu.Item> :
+                    {this.props.currentUser.id ? null :
                     <Menu.Item  onClick ={() => history.push('/login')} >Log In</Menu.Item>}
                     
                     </Menu.Menu>
