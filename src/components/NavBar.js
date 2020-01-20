@@ -20,12 +20,11 @@ class NavBar extends Component {
                     <Menu.Item onClick={() => history.push('/')}>Home</Menu.Item>
                     <Menu.Item onClick={()=> history.push('/shows/Musical')}>Musicals</Menu.Item>
                     <Menu.Item onClick={()=> history.push('/shows/Play')}>Plays</Menu.Item>
-                    <Menu.Item onClick={()=> history.push('/shows/Special')}>Specials</Menu.Item>
-                    <Menu.Item onClick={()=> history.push('/shows/Concert')}>Concerts</Menu.Item>
+                    <Menu.Item onClick={()=> history.push('/shows/other')}>Other</Menu.Item>
 
                     <Menu.Menu position='right'>
                     {this.props.currentUser.id ?
-                    <Menu.Item onClick={() => history.push(`/user/${this.props.currentUser.id}/dashboard`)}>Profile</Menu.Item> : 
+                    <Menu.Item onClick={() => history.push(`/dashboard`)}>Profile</Menu.Item> : 
                     <Menu.Item onClick={() => history.push('/signup')}>Sign Up</Menu.Item>}
                     {this.props.currentUser.id ? 
                     <Menu.Item  onClick={this.handleLogout}>Log Out</Menu.Item> :

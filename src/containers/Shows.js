@@ -14,7 +14,12 @@ class Shows extends Component {
 
     filterShows() {
         const categoryFilter = this.props.match.params.category
-       const allShows = this.props.shows.filter(show => show.category === categoryFilter)
+        let allShows
+        if (categoryFilter === 'other') {
+            allShows = this.props.shows.filter(show => show.category !== 'Musical' && show.category !== 'Play')
+        }else{
+            allShows = this.props.shows.filter(show => show.category === categoryFilter)
+        }
        return allShows
     }
 
