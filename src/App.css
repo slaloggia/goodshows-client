@@ -19,11 +19,9 @@
 
 .banner-img {
   height: 150px;
-  /* width: 100%; */
   background-image: url('./images/broadway3.jpg');
   background-position: center;
   background-size: 100%;
-  /* opacity: 0.65; */
   font-family: 'Diplomata';
   text-align: center;
   font-size: 60px;
@@ -39,16 +37,15 @@
 
 .home-container {
   width: 100%;
-  /* margin-left: 10%; */
   padding: 20px;
   text-align: center;
 }
 
 #user-form {
   padding: 20px;
-  width: 50%;
+  width: 35%;
   margin-left: 35%;
-  color: black
+  color: ghostwhite
 }
 
 .header.review-header {
@@ -92,10 +89,9 @@
 }
 
 .review-form-container {
-  width: 50%;
+  width: 75%;
   margin-left: 25%;
   margin-top: 10%;
-  background-color: ghostwhite;
   color: black;
   padding: 10px
 }

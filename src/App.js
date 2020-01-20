@@ -31,6 +31,7 @@ function App() {
             <Route path='/dashboard' component={Dashboard} />
             <Route exact path='/show/:id' component={ShowPage} />
             <Route path='/show/:id/review' component={Review} />
+            <Route exact path='/shows' component={Shows} />
             <Route path='/shows/:category' component={Shows} />
             <Route exact path='/signup' component={SignUp} />
             <Route path='/review/:id/edit' component={Review} />

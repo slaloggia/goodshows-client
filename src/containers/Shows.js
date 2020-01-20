@@ -13,12 +13,15 @@ class Shows extends Component {
     }
 
     filterShows() {
-        const categoryFilter = this.props.match.params.category
         let allShows
+        if(this.props.match.params.category){
+        const categoryFilter = this.props.match.params.category
         if (categoryFilter === 'other') {
             allShows = this.props.shows.filter(show => show.category !== 'Musical' && show.category !== 'Play')
         }else{
             allShows = this.props.shows.filter(show => show.category === categoryFilter)
+        }}else{
+            allShows = this.props.shows
         }
        return allShows
     }
@@ -50,7 +53,7 @@ class Shows extends Component {
     render() {
         return (
         <div className={'shows-container'}>
-            <input className='show-search' type='search' position='right' placeholder={`Search ${this.props.match.params.category}s`} value={this.state.search} onChange={this.handleSearch}/>
+            <input className='show-search' type='search' position='right' placeholder={`Search ${this.props.match.params.category || 'All Show'}s`} value={this.state.search} onChange={this.handleSearch}/>
             <br></br>
             <Card.Group onClick={this.handleImageClick} itemsPerRow={5}>
                 {this.displayShowImages()}

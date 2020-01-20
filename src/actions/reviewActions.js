@@ -10,6 +10,7 @@ export function getReviews() {
 }
 
 export function createReview(review) {
+    // console.log(review)
     return (dispatch) => {
         const reqObj = {
             method: 'POST',

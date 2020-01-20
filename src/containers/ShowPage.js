@@ -56,11 +56,7 @@ class ShowPage extends Component {
                     <Rating icon='star' rating={this.getRating(show)} maxRating={5} disabled/>
                     <br></br>
                     {this.onList(show) && this.showSeen(show) ? 
-                    <div>                       
-                        <Modal trigger={<Button inverted id='review-btn' >Review It!</Button>} >
-                            <Review showId={show.id} showTitle={show.title} match={this.props.match} onSubmit={(review) => this.props.createReview(review)} />
-                        </Modal>
-                    </div>
+                    <Review showId={show.id} showTitle={show.title} match={this.props.match} onSubmit={(review) => this.props.createReview(review)} />
                     : null}
                 </Card.Description>
             </Card.Content>

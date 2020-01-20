@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import WithAuth from '../components/WithAuth'
 import { loginSuccess, getUserInfo, updateProfile } from '../actions/userActions'
 import { getShows } from '../actions/showActions'
-import { deleteReview, updateReview } from '../actions/reviewActions'
+import { updateReview } from '../actions/reviewActions'
 import { Item, Grid, Placeholder, Image, Rating, Card, Button, Modal } from 'semantic-ui-react'
 import ChallengeBox from '../components/ChallengeBox'
 import EditProfile from '../components/EditProfile'
@@ -44,10 +44,7 @@ class Dashboard extends Component {
                 </Item.Meta>
                 <Item.Description>{review.content}</Item.Description>
                 <Item.Extra>
-                    <Modal trigger={<Button basic size='mini' >Edit</Button>} >
-                        <Review match={this.props.match} showTitle={review.show.title} showId={review.show.id} review={review} onSubmit={(review)=>this.submitUpdatedReview(review)}/>
-                    </Modal>
-                    <Button basic size='mini' onClick={() => this.props.deleteReview(review.id)}>Delete</Button>
+                    <Review match={this.props.match} showTitle={review.show.title} showId={review.show.id} review={review} onSubmit={(review)=>this.submitUpdatedReview(review)}/>
                 </Item.Extra>
             </Item.Content>
         </Item>))}
@@ -116,7 +113,6 @@ function mapDispatchToProps(dispatch) {
         loginSuccess: (user) => dispatch(loginSuccess(user)),
         getUserInfo: (id) => dispatch(getUserInfo(id)),
         getShows: () => dispatch(getShows()),
-        deleteReview: (id) => dispatch(deleteReview(id)),
         updateProfile: (event, avatar) => dispatch(updateProfile(event, avatar)),
         updateReview: (id, review) => dispatch(updateReview(id, review))
     }
