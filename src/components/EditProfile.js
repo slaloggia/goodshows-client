@@ -37,6 +37,7 @@ class EditProfile extends Component {
                         <h2>Upload a profile image</h2>
                         <input type='file' onChange={this.handleChange}/> 
                         <Button type='submit'>Save Image</Button>
+                        <Button onClick={this.handleModalChange} >Cancel</Button>
                     </Form>
                 </div>
             </Modal>

@@ -81,7 +81,8 @@ class ShowPage extends Component {
                     <span>{strftime('%B %e, %Y', new Date(review.created_at))}</span>
                 </Item.Meta>
                 <Item.Description>{review.content}</Item.Description>
-                <Comment.Group>
+                <Comment.Group >
+                    {this.renderComments(review)}
                     {this.props.currentUser.id ? 
                     <Button basic size='mini' onClick={this.toggleForm}>Add Comment</Button>
                     : null }
@@ -93,6 +94,19 @@ class ShowPage extends Component {
             </Item>)}else{
             return <h2>No reviews yet</h2>
         }
+    }
+
+    renderComments(review) {
+        console.log(review)
+        return review.comments.map(comment =>  <Comment key={comment.id}>
+                <Comment.Avatar src={comment.user.avatar ? comment.user.avatar : require('../images/default-user-icon.jpg')}/>
+                <Comment.Content>
+                    <Comment.Author>{comment.user.username}</Comment.Author>
+                    <Comment.Metadata>{strftime('%B %e, %Y', new Date(comment.created_at))}</Comment.Metadata>
+                    <Comment.Text>{comment.content}</Comment.Text>
+                </Comment.Content>
+            </Comment>
+        )
     }
 
     getRating() {
