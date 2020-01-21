@@ -13,8 +13,6 @@ const strftime = require('strftime')
 
 
 class Dashboard extends Component {
-
-
     renderMyShows(status) {
         const listShows = this.props.currentUser.my_shows.filter(show => show.seen === status)
         return listShows.map(showObj => 
@@ -53,7 +51,8 @@ class Dashboard extends Component {
     render() {
         const user = this.props.currentUser
         const reviews = this.findReviews()
-        // const my_shows = this.props.currentUser.my_shows
+
+      
         return (
         
             !this.props.currentUser.id ? <Placeholder.Header image/> :

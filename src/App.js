@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import './App.css';
 import { Router, Route, Switch } from 'react-router-dom';
 import Home from './containers/Home'
@@ -14,14 +14,25 @@ import { connect } from 'react-redux'
 import WithShows from './components/WithShows'
 import { getShows } from './actions/showActions'
 import { getReviews } from './actions/reviewActions'
-import { loginSuccess, getUserInfo } from './actions/userActions'
+import { loginSuccess, getUserInfo, getNotifications } from './actions/userActions'
 // import EditProfile from './components/EditProfile';
 
 
 
 
-function App() {
-  return (
+class App extends Component {
+
+  componentDidUpdate(prevProps, prevState){
+   if(this.props.currentUser.loggedIn && !prevProps.currentUser.loggedIn){
+    this.getNotifications(this.props.currentUser.id)
+     setInterval(() => {
+       this.getNotifications(this.props.currentUser.id)
+     }, 180000)
+   }
+  }
+
+  render() {
+    return (
     <div >
       <NavBar/>
       <Router history={history}>
@@ -35,12 +46,10 @@ function App() {
             <Route path='/shows/:category' component={Shows} />
             <Route exact path='/signup' component={SignUp} />
             <Route path='/review/:id/edit' component={Review} />
-            {/* <Route path='/profile/edit' component={EditProfile} /> */}
-
           </Switch>
       </Router>
     </div>
-  );
+  )};
 }
 
 const mapStateToProps = ({shows, currentUser, reviews}) => ({shows, currentUser, reviews})
@@ -50,7 +59,8 @@ function mapDispatchToProps(dispatch) {
       getShows: () => dispatch(getShows()),
       getUserInfo: (id) => dispatch(getUserInfo(id)),
       loginSuccess: (user) => dispatch(loginSuccess(user)),
-      getReviews: () => dispatch(getReviews())
+      getReviews: () => dispatch(getReviews()),
+      getNotifications: (id) => dispatch(getNotifications(id))
   }
 }
 

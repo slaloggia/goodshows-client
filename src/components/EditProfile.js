@@ -35,7 +35,7 @@ class EditProfile extends Component {
             <Button  onClick={this.handleModalChange} basic compact fluid>Add or Change Profile Picture</Button>
             <Modal  open={this.state.open}>
                 <div>
-                    <Form id='user-form' data-id={this.props.currentUser.id} onSubmit={this.handleSubmitForm} >
+                    <Form id='upload-form' data-id={this.props.currentUser.id} onSubmit={this.handleSubmitForm} inverted>
                         <h2>Upload a profile image</h2>
                         {this.state.preview ? 
                         <Image size='small' src={this.state.preview}/> : null}

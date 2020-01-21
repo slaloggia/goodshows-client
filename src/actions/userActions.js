@@ -11,12 +11,16 @@ export const loginSuccess = (user) => {
     }
 }
 
+
 export function getUserInfo(id) {
     return (dispatch) => {
 
         fetch(USERS_URL + id)
         .then(resp => resp.json())
-        .then(user => dispatch(loginSuccess(user)))
+        .then(user => {
+            dispatch(loginSuccess(user))
+            dispatch(getNotifications(id))
+        })
     }
 }
 
@@ -61,6 +65,7 @@ export function updateProfile(event, avatar) {
 }
 
 export function getNotifications(id) {
+    console.log('hello')
     return (dispatch) => {
         fetch(`https://good-shows-api.herokuapp.com/notifications/${id}`)
         .then(resp => resp.json())

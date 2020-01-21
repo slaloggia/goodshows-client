@@ -28,7 +28,6 @@ class LogIn extends Component {
           } else {
             localStorage.setItem('token', data.token)
             this.props.getUserInfo(data.id)
-            // this.props.getNotifications(data.id)
             this.props.history.push(`/dashboard`)
           }
         })

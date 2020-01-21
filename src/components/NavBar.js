@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 import { connect } from 'react-redux'
-import { Menu, Image, Dropdown } from 'semantic-ui-react'
+import { Menu, Image, Dropdown, Icon, Label } from 'semantic-ui-react'
 import history from '../history'
 import { logoutUser, getNotifications } from '../actions/userActions'
 
@@ -12,10 +12,8 @@ class NavBar extends Component {
         history.push('/')
     }
 
+
     render() {
-        if(this.props.currentUser.loggedIn) {
-            this.props.getNotifications(this.props.currentUser.id)
-        }
         return (
             <div className='page-header'>
                 <div className='banner-img'><br/><br/><br></br>GoodShows!</div>
@@ -26,21 +24,26 @@ class NavBar extends Component {
                     <Menu.Item onClick={()=> history.push('/shows/Play')}>Plays</Menu.Item>
                     <Menu.Item onClick={()=> history.push('/shows/other')}>Other</Menu.Item>
 
-                    <Menu.Menu position='right'>
-                    {this.props.currentUser.id ?
-                    <Menu.Item >
-                        <Image src={this.props.currentUser.avatar || require('../images/default-user-icon.jpg')} avatar/>
-                        <Dropdown options={[
-                            <Menu.Item  onClick={() => history.push(`/dashboard`)} key='profile'>Profile</Menu.Item>,
-                            <Menu.Item  onClick={this.handleLogout} key='logout'>Log Out</Menu.Item> 
-                        ]}/>
-                    </Menu.Item> : 
-                    <Menu.Item onClick={() => history.push('/signup')}>Sign Up</Menu.Item>}
-                    {this.props.currentUser.id ? null :
-                    <Menu.Item  onClick ={() => history.push('/login')} >Log In</Menu.Item>}
                     
-                    </Menu.Menu>
-
+                {this.props.currentUser.id ?
+                    <Menu.Menu position='right'>
+                        <Menu.Item>
+                            {this.props.currentUser.notifications.length > 0 ?
+                            <Label color='blue' circular >{this.props.currentUser.notifications.length}</Label> : null}
+                            <Icon name='bell'/>
+                        </Menu.Item>
+                        <Menu.Item >
+                            <Image src={this.props.currentUser.avatar || require('../images/default-user-icon.jpg')} avatar/>
+                            <Dropdown options={[
+                                <Menu.Item  onClick={() => history.push(`/dashboard`)} key='profile'>Profile</Menu.Item>,
+                                <Menu.Item  onClick={this.handleLogout} key='logout'>Log Out</Menu.Item> 
+                            ]}/>
+                        </Menu.Item> 
+                    </Menu.Menu> : 
+                    <Menu.Menu position='right'>
+                        <Menu.Item onClick={() => history.push('/signup')}>Sign Up</Menu.Item>
+                        <Menu.Item  onClick ={() => history.push('/login')} >Log In</Menu.Item>
+                    </Menu.Menu>}
                 </Menu>
             </div>
         )

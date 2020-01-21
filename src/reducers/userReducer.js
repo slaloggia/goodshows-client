@@ -1,5 +1,12 @@
 export default function userReducer(state={
-    loggedIn: false
+    loggedIn: false,
+    id: null,
+    username: '',
+    avatar: null,
+    since: null,
+    my_reviews: [],
+    my_shows: [],
+    notifications: []
 }, action) {
     switch(action.type) {
         case 'LOGIN_SUCCESS':
