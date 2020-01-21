@@ -28,8 +28,8 @@ class NavBar extends Component {
                     <Menu.Item >
                         <Image src={this.props.currentUser.avatar || require('../images/default-user-icon.jpg')} avatar/>
                         <Dropdown options={[
-                            <Menu.Item  onClick={() => history.push(`/dashboard`)}>Profile</Menu.Item>,
-                            <Menu.Item  onClick={this.handleLogout}>Log Out</Menu.Item> 
+                            <Menu.Item  onClick={() => history.push(`/dashboard`)} key='profile'>Profile</Menu.Item>,
+                            <Menu.Item  onClick={this.handleLogout} key='logout'>Log Out</Menu.Item> 
                         ]}/>
                     </Menu.Item> : 
                     <Menu.Item onClick={() => history.push('/signup')}>Sign Up</Menu.Item>}

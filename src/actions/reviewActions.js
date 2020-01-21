@@ -57,3 +57,20 @@ export function deleteReview(id) {
         .then(() => history.push(`/dashboard`))
     }
 }
+
+export function createComment(comment) {
+    return (dispatch) =>  {
+        const reqObj = {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json'
+            },
+            body: JSON.stringify(comment)
+        } 
+
+        fetch('https://good-shows-api.herokuapp.com/comments', reqObj)
+        .then(resp => resp.json())
+        .then(newComment => console.log(newComment))
+    }
+}

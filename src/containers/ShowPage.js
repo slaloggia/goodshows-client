@@ -1,15 +1,20 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { Grid, Rating, Card, Image, Placeholder, Form, Dropdown, Item, Button, Modal } from 'semantic-ui-react'
+import { Grid, Rating, Card, Image, Placeholder, Form, Dropdown, Item, Comment, Button } from 'semantic-ui-react'
 // import WithShows from '../components/WithShows'
 import { getShows } from '../actions/showActions'
 import { loginSuccess, getUserInfo, addToList } from '../actions/userActions'
 import  { getReviews, createReview } from '../actions/reviewActions'
 import Review from '../components/Review'
+import CommentForm from '../components/CommentForm'
 
 const strftime = require('strftime')
 
 class ShowPage extends Component {
+    state= {
+        commentFormVisible: false
+    }
+
     findShow() {
         return this.props.shows.find(show => show.id === parseInt(this.props.match.params.id))
     }
@@ -36,8 +41,8 @@ class ShowPage extends Component {
             </div>
     }
 
-    handleModalOpen() {
-        this.setState({modalOpen: !this.state.modalOpen})
+    toggleForm =() => {
+        this.setState({commentFormVisible: !this.state.commentFormVisible})
     }
 
     renderShowCard(show) {
@@ -76,8 +81,16 @@ class ShowPage extends Component {
                     <span>{strftime('%B %e, %Y', new Date(review.created_at))}</span>
                 </Item.Meta>
                 <Item.Description>{review.content}</Item.Description>
+                <Comment.Group>
+                    {this.props.currentUser.id ? 
+                    <Button basic size='mini' onClick={this.toggleForm}>Add Comment</Button>
+                    : null }
+                    {this.state.commentFormVisible ? <CommentForm userId={this.props.currentUser.id} reviewId={review.id}  /> :
+                    null}
+                </Comment.Group>
+
             </Item.Content>
-        </Item>)}else{
+            </Item>)}else{
             return <h2>No reviews yet</h2>
         }
     }
