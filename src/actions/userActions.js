@@ -39,7 +39,7 @@ export function addToList(show) {
         fetch(USER_SHOWS_URL, reqObj)
         .then(resp => resp.json())
         .then(data => dispatch({type: 'ADD_USER_SHOW', data}))
-        .then((data) => history.push(`/dashboard`))
+        .then(() => history.push(`/dashboard`))
     }
 }
 
@@ -57,5 +57,13 @@ export function updateProfile(event, avatar) {
         fetch(USERS_URL + userId, reqObj)
         .then(resp => resp.json())
         .then(data => dispatch({type: 'UPDATE_PROFILE_PIC', data}))
+    }
+}
+
+export function getNotifications(id) {
+    return (dispatch) => {
+        fetch(`https://good-shows-api.herokuapp.com/notifications/${id}`)
+        .then(resp => resp.json())
+        .then(data => dispatch({type: 'GET_NOTIFICATIONS', data}))
     }
 }

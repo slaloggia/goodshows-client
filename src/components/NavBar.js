@@ -2,7 +2,7 @@ import React, {Component} from 'react'
 import { connect } from 'react-redux'
 import { Menu, Image, Dropdown } from 'semantic-ui-react'
 import history from '../history'
-import { logoutUser } from '../actions/userActions'
+import { logoutUser, getNotifications } from '../actions/userActions'
 
 class NavBar extends Component {
 
@@ -13,6 +13,9 @@ class NavBar extends Component {
     }
 
     render() {
+        if(this.props.currentUser.loggedIn) {
+            this.props.getNotifications(this.props.currentUser.id)
+        }
         return (
             <div className='page-header'>
                 <div className='banner-img'><br/><br/><br></br>GoodShows!</div>
@@ -48,7 +51,8 @@ const mapStateToProps = ({currentUser}) => ({currentUser})
 
 function mapDispatchToProps(dispatch) {
     return {
-        logoutUser: ()=> dispatch(logoutUser())
+        logoutUser: ()=> dispatch(logoutUser()),
+        getNotifications: (id) => dispatch(getNotifications(id))
     }
 }
 

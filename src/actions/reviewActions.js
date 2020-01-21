@@ -66,7 +66,9 @@ export function createComment(comment) {
                 'Content-Type': 'application/json',
                 'Accept': 'application/json'
             },
-            body: JSON.stringify(comment)
+            body: JSON.stringify({
+                comment: comment
+            })
         } 
 
         fetch('https://good-shows-api.herokuapp.com/comments', reqObj)

@@ -10,7 +10,8 @@ export default function userReducer(state={
                 avatar: action.user.avatar,
                 since: action.user.created_at,
                 my_reviews: action.user.reviews,
-                my_shows: action.user.user_shows
+                my_shows: action.user.user_shows,
+                notifications: []
             }
         case 'LOGOUT_USER':
             return {loggedIn: false}
@@ -24,6 +25,11 @@ export default function userReducer(state={
             return {
                 ...state,
                 avatar: action.data.avatar
+            }
+        case 'GET_NOTIFICATIONS':
+            return {
+                ...state,
+                notifications: action.data
             }
         default:
         return state
