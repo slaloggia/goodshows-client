@@ -1,18 +1,20 @@
 import React, { Component } from 'react'
 import WithAuth from '../components/WithAuth'
-import { Form, Button, Modal } from 'semantic-ui-react'
+import { Form, Button, Modal, Image } from 'semantic-ui-react'
 import { connect } from 'react-redux'
 import { loginSuccess, getUserInfo, updateProfile } from '../actions/userActions'
 
 class EditProfile extends Component {
     state= {
-        avatar: null, 
+        avatar: null,
+        preview: null, 
         open: false
     }
 
     handleChange = (event) => {
         this.setState({
-            avatar: event.target.files[0]
+            avatar: event.target.files[0],
+            preview: URL.createObjectURL(event.target.files[0])
         })
     }
 
@@ -29,12 +31,14 @@ class EditProfile extends Component {
 
     render() {
         return (
-        <div>
+        <div >
             <Button  onClick={this.handleModalChange} basic compact fluid>Add or Change Profile Picture</Button>
-            <Modal open={this.state.open}>
+            <Modal  open={this.state.open}>
                 <div>
                     <Form id='user-form' data-id={this.props.currentUser.id} onSubmit={this.handleSubmitForm} >
                         <h2>Upload a profile image</h2>
+                        {this.state.preview ? 
+                        <Image size='small' src={this.state.preview}/> : null}
                         <input type='file' onChange={this.handleChange}/> 
                         <Button type='submit'>Save Image</Button>
                         <Button onClick={this.handleModalChange} >Cancel</Button>
