@@ -34,7 +34,7 @@ class Dashboard extends Component {
         if (reviews.length > 0){
         return reviews.map(review => (
         <Item  key={review.id}>
-            <Item.Header className='review-header'>{review.show.title}  </Item.Header>
+            <Item.Header className='review-header' as='a' onClick={() => this.props.history.push(`/show/${review.show_id}`)}>{review.show.title}  </Item.Header>
             <Item.Content>
                 <Rating rating={review.rating} maxRating={5} disabled></Rating>
                 <Item.Meta>

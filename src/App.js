@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
 import { Router, Route, Switch } from 'react-router-dom';
+import ScrollToTop from './components/ScrollToTop'
 import Home from './containers/Home'
 import NavBar from './components/NavBar'
 import LogIn from './components/LogIn'
@@ -35,7 +36,8 @@ class App extends Component {
     return (
     <div >
       <NavBar/>
-      <Router history={history} onUpdate={() => window.scrollTo(0, 0)}>
+      <Router history={history} >
+        <ScrollToTop />
           <Switch>
             <Route exact path='/' component={Home}/>
             <Route exact path='/login' component={LogIn} />
