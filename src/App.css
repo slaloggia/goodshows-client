@@ -18,7 +18,7 @@
 }
 
 .banner-img {
-  height: 150px;
+  height: 140px;
   background-image: url('./images/broadway3.jpg');
   background-position: center;
   background-size: 100%;
@@ -26,8 +26,12 @@
   text-align: center;
   font-size: 60px;
   color: black;
-  text-shadow: 10px 0px 30px #FFCD00;
+  text-shadow: 0px 0px 80px #FFCD00, 0px 0px 80px #FFCD00, 0px 0px 80px #FFCD00;
 
+}
+
+.welcome {
+  font-family: 'Playfair Display', serif
 }
 
 #notif-label {
@@ -41,7 +45,7 @@
 
 .home-container {
   width: 100%;
-  padding: 25px;
+  padding: 20px;
   text-align: center;
 }
 
@@ -157,7 +161,6 @@
 }
 
 #cover-flow {
-  margin-top: 5%;
   border-radius: 25px;
   width: 70%;
   margin-left: 15%

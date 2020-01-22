@@ -13,6 +13,8 @@ class Home extends Component {
         const sortedShows = this.props.shows.sort((a, b) => a.reviews.length > b.reviews.length ? -1 : 1)
         return (
             <div className='home-container'>
+                <h2 className='welcome'>Browse and Search Broadway shows from the past 20 years</h2>
+                <h3 className='welcome'>Create an Account or Log In to add shows to your list and review them</h3>
                 <CoverList shows={sortedShows.slice(0, 11)}/>
             </div>
         )
