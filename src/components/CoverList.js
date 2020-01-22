@@ -29,7 +29,7 @@ class CoverList extends React.Component {
       <div id='cover-flow'>
         <Coverflow
           width={480}
-          height={500}
+          height={650}
           displayQuantityOfSide={2}
           navigation={false}
           enableHeading={false}
