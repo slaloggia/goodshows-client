@@ -20,14 +20,14 @@ class NavBar extends Component {
     notificationFeed() {
         return this.props.currentUser.notifications.map(n => {
             const thisReview = this.props.reviews.find(review => review.id === n.notifiable_id)
-            return (
+            return (thisReview ?
             <Feed.Event key={n.id}>
                 <Feed.Content>
                     <Feed.Summary>
                         <Feed.User onClick={() => this.handleReadNotification(n.id, thisReview.show_id)}>{n.actor.username}</Feed.User> commented on your {thisReview.show.title} review
                     </Feed.Summary>
                 </Feed.Content>
-            </Feed.Event>)
+            </Feed.Event> : null)
         })
     }
 
