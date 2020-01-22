@@ -163,7 +163,8 @@
 #cover-flow {
   border-radius: 25px;
   width: 70%;
-  margin-left: 15%
+  margin-left: 15%;
+  margin-top: 5%
 }
 
 .ui.comments {
