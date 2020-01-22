@@ -24,10 +24,19 @@ export default function userReducer(state={
             return {loggedIn: false}
         case 'ADD_USER_SHOW':
             const current_shows = state.my_shows
+            const new_show = action.data
+            if (current_shows.find(user_show => user_show.show_id === new_show.show_id)) {
+                const index = state.my_shows.findIndex(user_show => user_show.show_id === new_show.show_id)
+                const my_shows = [...state.my_shows.slice(0, index), new_show, ...state.my_shows.slice(index+1)]
+                return {
+                    ...state,
+                    my_shows: my_shows
+                }
+            }else{
             return {
                 ...state, 
                 my_shows: [...current_shows, action.data]
-            }
+            }}
         case 'UPDATE_PROFILE_PIC':
             return {
                 ...state,
