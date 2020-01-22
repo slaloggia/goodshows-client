@@ -12,7 +12,7 @@ const strftime = require('strftime')
 
 class ShowPage extends Component {
     state= {
-        commentFormVisible: false
+        commentFormVisible: null
     }
 
     findShow() {
@@ -41,8 +41,12 @@ class ShowPage extends Component {
             </div>
     }
 
-    toggleForm =() => {
-        this.setState({commentFormVisible: !this.state.commentFormVisible})
+    toggleForm =(id) => {
+        if(this.state.commentFormVisible) {
+            this.setState({commentFormVisible: null})
+        }else{
+        this.setState({commentFormVisible: id})
+        }
     }
 
     
@@ -86,9 +90,9 @@ class ShowPage extends Component {
                 <Comment.Group >
                     {this.renderComments(review)}
                     {this.props.currentUser.id ? 
-                    <Button basic size='mini' onClick={this.toggleForm}>Add Comment</Button>
+                    <Button basic size='mini' onClick={()=>this.toggleForm(review.id)}>Add Comment</Button>
                     : null }
-                    {this.state.commentFormVisible ? <CommentForm userId={this.props.currentUser.id} reviewId={review.id}  toggleForm={this.toggleForm} /> :
+                    {this.state.commentFormVisible === review.id ? <CommentForm userId={this.props.currentUser.id} reviewId={review.id}  toggleForm={this.toggleForm} /> :
                     null}
                 </Comment.Group>
 
