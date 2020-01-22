@@ -23,7 +23,7 @@ class NavBar extends Component {
         return (<Feed.Event key={n.id}>
             <Feed.Content>
                 <Feed.Summary>
-                    <Feed.User onClick={() => this.handleReadNotification(n.id, review.show.id)}>{n.actor.username}</Feed.User> commented on your {review.show.title} review
+                    <Feed.User onClick={() => this.handleReadNotification(n.id, review.show_id)}>{n.actor.username}</Feed.User> commented on your {review.show.title} review
                 </Feed.Summary>
             </Feed.Content>
         </Feed.Event>)})

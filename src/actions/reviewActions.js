@@ -23,10 +23,7 @@ export function createReview(review) {
 
         fetch(REVIEWS_URL, reqObj)
         .then(resp => resp.json())
-        .then(newReview => 
-            dispatch({type: 'ADD_REVIEW', newReview})
-            )
-        .then(() => history.push(`/dashboard`))
+        .then(newReview => dispatch({type: 'ADD_REVIEW', newReview}))
     }
 }
 
@@ -73,6 +70,6 @@ export function createComment(comment) {
 
         fetch('https://good-shows-api.herokuapp.com/comments', reqObj)
         .then(resp => resp.json())
-        .then(newComment => console.log(newComment))
+        .then(newComment => dispatch({type: 'ADD_COMMENT', newComment}))
     }
 }
