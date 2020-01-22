@@ -35,7 +35,7 @@ class App extends Component {
     return (
     <div >
       <NavBar/>
-      <Router history={history}>
+      <Router history={history} onUpdate={() => window.scrollTo(0, 0)}>
           <Switch>
             <Route exact path='/' component={Home}/>
             <Route exact path='/login' component={LogIn} />
