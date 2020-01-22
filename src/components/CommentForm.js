@@ -24,6 +24,7 @@ class CommentForm extends Component {
             review_id: this.props.reviewID,
             content: ''
         })
+        this.props.toggleForm()
     }
 
     render() {

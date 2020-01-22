@@ -83,7 +83,12 @@
 }
 
 .review-header {
-  font-weight: bold
+  font-weight: bold;
+  width: 20%
+}
+
+.user-review-content {
+  width: 80%
 }
 
 .ui.card {
@@ -95,7 +100,7 @@
 }
 
 #review-btn {
-  background-color: #e10013
+  background-color: #e1004f
 }
 
 .review-form-container {
@@ -112,7 +117,7 @@
   color: black;
   padding: 5%;
   border-radius: 20px;
-  max-height: 400px;
+  max-height: 500px;
   overflow-x: hidden;
   overflow-y: auto
 }
@@ -130,7 +135,7 @@
 }
 
 .review-link {
-  color: #e10013
+  color: #e1004f
 }
 
 .ui.image {

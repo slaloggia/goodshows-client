@@ -45,6 +45,8 @@ class ShowPage extends Component {
         this.setState({commentFormVisible: !this.state.commentFormVisible})
     }
 
+    
+
     renderShowCard(show) {
         
         return (
@@ -75,7 +77,7 @@ class ShowPage extends Component {
         return reviews.map(review => <Item  key={review.id}>
             <Item.Image src={review.user.avatar ? review.user.avatar : require('../images/default-user-icon.jpg')} avatar size='mini' />
             <Item.Content>
-                <Item.Header>{review.user.username}</Item.Header><br></br>
+                <Item.Header as='a' onClick={() => this.props.history.push(`/user/${review.user_id}`)}>{review.user.username}</Item.Header><br></br>
                 <Rating rating={review.rating} maxRating={5} disabled></Rating>
                 <Item.Meta>
                     <span>{strftime('%B %e, %Y', new Date(review.created_at))}</span>
@@ -86,7 +88,7 @@ class ShowPage extends Component {
                     {this.props.currentUser.id ? 
                     <Button basic size='mini' onClick={this.toggleForm}>Add Comment</Button>
                     : null }
-                    {this.state.commentFormVisible ? <CommentForm userId={this.props.currentUser.id} reviewId={review.id}  /> :
+                    {this.state.commentFormVisible ? <CommentForm userId={this.props.currentUser.id} reviewId={review.id}  toggleForm={this.toggleForm} /> :
                     null}
                 </Comment.Group>
 
@@ -100,7 +102,7 @@ class ShowPage extends Component {
         return review.comments.map(comment =>  <Comment key={comment.id}>
                 <Comment.Avatar src={comment.user.avatar ? comment.user.avatar : require('../images/default-user-icon.jpg')}/>
                 <Comment.Content>
-                    <Comment.Author>{comment.user.username}</Comment.Author>
+                    <Comment.Author as='a' onClick={() => this.props.history.push(`/user/${comment.user.id}`)}>{comment.user.username}</Comment.Author>
                     <Comment.Metadata>{strftime('%B %e, %Y', new Date(comment.created_at))}</Comment.Metadata>
                     <Comment.Text>{comment.content}</Comment.Text>
                 </Comment.Content>

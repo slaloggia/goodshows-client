@@ -8,6 +8,7 @@ import Dashboard from './containers/Dashboard'
 import ShowPage from './containers/ShowPage'
 import Shows from './containers/Shows'
 import Review from './components/Review'
+import UserReviews from './containers/UserReviews'
 import SignUp from './components/SignUp'
 import history from './history'
 import { connect } from 'react-redux'
@@ -45,6 +46,7 @@ class App extends Component {
             <Route path='/shows/:category' component={Shows} />
             <Route exact path='/signup' component={SignUp} />
             <Route path='/review/:id/edit' component={Review} />
+            <Route path='/user/:id' component={UserReviews} />
           </Switch>
       </Router>
     </div>
