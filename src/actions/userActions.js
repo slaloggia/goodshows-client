@@ -65,10 +65,17 @@ export function updateProfile(event, avatar) {
 }
 
 export function getNotifications(id) {
-    console.log('hello')
     return (dispatch) => {
         fetch(`https://good-shows-api.herokuapp.com/notifications/${id}`)
         .then(resp => resp.json())
         .then(data => dispatch({type: 'GET_NOTIFICATIONS', data}))
+    }
+}
+
+export function deleteNotification(id) {
+    return (dispatch) => {
+        fetch(`https://good-shows-api.herokuapp.com/notifications/${id}`, {method: 'DELETE'})
+        .then(resp => resp.json())
+        .then(notif => dispatch({type: 'REMOVE_NOTIFICATION', notif}))
     }
 }

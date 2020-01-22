@@ -26,12 +26,16 @@
   text-align: center;
   font-size: 60px;
   color: black;
-  text-shadow: 10px 0px 30px rgb(247, 226, 108);
+  text-shadow: 10px 0px 30px #FFCD00;
 
 }
 
+#notif-label {
+  background-color: #1451D3
+}
+
 .ui.inverted.menu {
-  background: #e10031;
+  background: #e1004f;
   margin: 0px
 }
 

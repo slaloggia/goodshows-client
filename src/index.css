@@ -7,7 +7,7 @@ body {
   -moz-osx-font-smoothing: grayscale;
   background-image: url('images/black_curtain.jpg');
   background-attachment: fixed;
-  color: ghostwhite
+  color: white
 }
 
 code {

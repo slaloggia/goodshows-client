@@ -97,7 +97,6 @@ class ShowPage extends Component {
     }
 
     renderComments(review) {
-        console.log(review)
         return review.comments.map(comment =>  <Comment key={comment.id}>
                 <Comment.Avatar src={comment.user.avatar ? comment.user.avatar : require('../images/default-user-icon.jpg')}/>
                 <Comment.Content>

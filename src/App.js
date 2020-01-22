@@ -15,7 +15,6 @@ import WithShows from './components/WithShows'
 import { getShows } from './actions/showActions'
 import { getReviews } from './actions/reviewActions'
 import { loginSuccess, getUserInfo, getNotifications } from './actions/userActions'
-// import EditProfile from './components/EditProfile';
 
 
 
@@ -24,9 +23,9 @@ class App extends Component {
 
   componentDidUpdate(prevProps, prevState){
    if(this.props.currentUser.loggedIn && !prevProps.currentUser.loggedIn){
-    this.getNotifications(this.props.currentUser.id)
+    this.props.getNotifications(this.props.currentUser.id)
      setInterval(() => {
-       this.getNotifications(this.props.currentUser.id)
+       this.props.getNotifications(this.props.currentUser.id)
      }, 180000)
    }
   }

@@ -1,8 +1,8 @@
 import React, {Component} from 'react'
 import { connect } from 'react-redux'
-import { Menu, Image, Dropdown, Icon, Label } from 'semantic-ui-react'
+import { Menu, Image, Dropdown, Icon, Label, Popup, Feed } from 'semantic-ui-react'
 import history from '../history'
-import { logoutUser, getNotifications } from '../actions/userActions'
+import { logoutUser, getNotifications, deleteNotification } from '../actions/userActions'
 
 class NavBar extends Component {
 
@@ -12,12 +12,29 @@ class NavBar extends Component {
         history.push('/')
     }
 
+    handleReadNotification = (notifId, showId) => {
+        this.props.deleteNotification(notifId)
+        history.push(`/show/${showId}`)
+    }
+
+    notificationFeed() {
+        return this.props.currentUser.notifications.map(n => {
+            const review = this.props.reviews.find(review => review.id === n.notifiable_id)
+        return (<Feed.Event key={n.id}>
+            <Feed.Content>
+                <Feed.Summary>
+                    <Feed.User onClick={() => this.handleReadNotification(n.id, review.show.id)}>{n.actor.username}</Feed.User> commented on your {review.show.title} review
+                </Feed.Summary>
+            </Feed.Content>
+        </Feed.Event>)})
+    }
+
 
     render() {
         return (
             <div className='page-header'>
                 <div className='banner-img'><br/><br/><br></br>GoodShows!</div>
-                <Menu inverted size='large' fitted='vertically'>
+                <Menu inverted size='huge' fitted='vertically'>
                     <Menu.Item onClick={() => history.push('/')}>Home</Menu.Item>
                     <Menu.Item onClick={()=> history.push('/shows')}>All Shows</Menu.Item>
                     <Menu.Item onClick={()=> history.push('/shows/Musical')}>Musicals</Menu.Item>
@@ -29,8 +46,12 @@ class NavBar extends Component {
                     <Menu.Menu position='right'>
                         <Menu.Item>
                             {this.props.currentUser.notifications.length > 0 ?
-                            <Label color='blue' circular >{this.props.currentUser.notifications.length}</Label> : null}
-                            <Icon name='bell'/>
+                            <Label id='notif-label' circular >{this.props.currentUser.notifications.length}</Label> : null}
+                            <Popup trigger={<Icon name='bell'/>} on='click' offset='0, 5px' position='bottom center' >
+                                <Feed >
+                                    {this.notificationFeed()}
+                                </Feed>
+                            </Popup>
                         </Menu.Item>
                         <Menu.Item >
                             <Image src={this.props.currentUser.avatar || require('../images/default-user-icon.jpg')} avatar/>
@@ -50,12 +71,13 @@ class NavBar extends Component {
     }
 }
 
-const mapStateToProps = ({currentUser}) => ({currentUser})
+const mapStateToProps = ({currentUser, reviews}) => ({currentUser, reviews})
 
 function mapDispatchToProps(dispatch) {
     return {
         logoutUser: ()=> dispatch(logoutUser()),
-        getNotifications: (id) => dispatch(getNotifications(id))
+        getNotifications: (id) => dispatch(getNotifications(id)),
+        deleteNotification: (id) => dispatch(deleteNotification(id))
     }
 }
 

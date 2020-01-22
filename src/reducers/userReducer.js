@@ -38,6 +38,12 @@ export default function userReducer(state={
                 ...state,
                 notifications: action.data
             }
+        case 'REMOVE_NOTIFICATION':
+            const unread = state.notifications.filter(n => n.id !== action.notif.id)
+            return {
+                ...state,
+                notifications: unread
+            }
         default:
         return state
     }
