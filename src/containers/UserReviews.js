@@ -56,7 +56,7 @@ class UserReviews extends Component {
                 <Grid.Column width={10} divided='vertically'>
                     <Grid.Row>
                         <h3>{this.state.user.username}'s Reviews</h3>
-                        <div className='reviews-container'>
+                        <div className='info-container'>
                             <Item.Group divided>
                             {this.state.user.reviews ? this.renderMyReviews(reviews) : <Placeholder />}
                             </Item.Group>

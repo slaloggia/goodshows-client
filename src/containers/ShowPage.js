@@ -172,7 +172,7 @@ class ShowPage extends Component {
                 </Grid.Column>
                 <Grid.Column width={8}>
                     <h2>User Reviews</h2>
-                    <div className='reviews-container'>
+                    <div className='info-container'>
                         <Item.Group divided>
                         {this.renderReviews(reviews)}
                         </Item.Group>

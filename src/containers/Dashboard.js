@@ -79,19 +79,19 @@ class Dashboard extends Component {
                 <Grid.Column width={10} divided='vertically'>
                     <Grid.Row>
                         <h3>Shows I Have Seen</h3>
-                        <Image.Group size='small'>
+                        <Image.Group size='small' className='info-container'>
                             {this.renderMyShows(true)}
                         </Image.Group>
                     </Grid.Row>
                     <Grid.Row>{/* want to see list */}
                     <h3>Shows I Want To See</h3>
-                        <Image.Group size='tiny'>
+                        <Image.Group size='tiny' className='info-container'>
                             {this.renderMyShows(false)}
                         </Image.Group>
                     </Grid.Row>
                     <Grid.Row>{/* user's reviews */}
                         <h3>My Reviews</h3>
-                        <div className='reviews-container'>
+                        <div className='info-container'>
                             <Item.Group divided>
                             {this.renderMyReviews(reviews)}
                             </Item.Group>
