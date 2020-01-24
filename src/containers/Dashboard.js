@@ -24,10 +24,10 @@ class Dashboard extends Component {
         return this.props.reviews.filter(review => review.user_id === this.props.currentUser.id)
     }
 
-    submitUpdatedReview(review) {
-        this.props.updateReview(review)
-        window.location.reload(true)
-    }
+    // submitUpdatedReview(review) {
+    //     this.props.updateReview(review)
+    //     window.location.reload(true)
+    // }
 
 
     renderMyReviews(reviews) {
@@ -35,14 +35,14 @@ class Dashboard extends Component {
         return reviews.map(review => (
         <Item  key={review.id}>
             <Item.Header className='review-header' as='a' onClick={() => this.props.history.push(`/show/${review.show_id}`)}>{review.show.title}  </Item.Header>
-            <Item.Content>
+            <Item.Content className='user-review-content'>
                 <Rating rating={review.rating} maxRating={5} disabled></Rating>
                 <Item.Meta>
                     <span>{strftime('%B %e, %Y', new Date(review.created_at))}</span>
                 </Item.Meta>
-                <Item.Description>{review.content}</Item.Description>
+                <Item.Description >{review.content}</Item.Description>
                 <Item.Extra>
-                    <Review match={this.props.match} showTitle={review.show.title} showId={review.show.id} review={review} onSubmit={(review)=>this.submitUpdatedReview(review)}/>
+                    <Review match={this.props.match} showTitle={review.show.title} showId={review.show.id} review={review} onSubmit={this.props.updateReview}/>
                 </Item.Extra>
             </Item.Content>
         </Item>))}
@@ -113,7 +113,7 @@ function mapDispatchToProps(dispatch) {
         getUserInfo: (id) => dispatch(getUserInfo(id)),
         getShows: () => dispatch(getShows()),
         updateProfile: (event, avatar) => dispatch(updateProfile(event, avatar)),
-        updateReview: (id, review) => dispatch(updateReview(id, review))
+        updateReview: (review) => dispatch(updateReview(review))
     }
 }
 

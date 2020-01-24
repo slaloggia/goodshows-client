@@ -28,8 +28,9 @@ export function createReview(review) {
 }
 
 export function updateReview(review) {
+    console.log(review)
     return (dispatch) => {
-        const id = review.review_id
+        const id = review.id
         const reqObj = {
             method: 'PATCH',
             headers: {

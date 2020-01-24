@@ -10,7 +10,7 @@ class Review extends Component {
     state= {
         open: false,
         review: {
-        review_id: "",
+        id: "",
         user_id: this.props.currentUser.id,
         show_id: this.props.showId,
         // rating_id: '',
@@ -19,6 +19,7 @@ class Review extends Component {
     }
 
     handleChange = (event) => {
+        event.persist()
         this.setState({review: {
             ...this.state.review,
             [event.target.name]: event.target.value
@@ -33,11 +34,13 @@ class Review extends Component {
         if (this.props.review) {
             const review = this.props.review
             this.setState({
-                review_id: review.id,
+                review: {
+                id: review.id,
                 user_id: review.user_id,
                 show_id: review.show_id,
                 rating: review.rating,
                 content: review.content
+                }
             })
         }
     }
@@ -55,7 +58,7 @@ class Review extends Component {
                 {this.props.review ?
                 <div >
                     <Button basic size='mini' onClick={this.changeModalOpen}>Edit</Button>
-                    <Button basic size='mini' onClick={() => this.props.deleteReview(this.state.review.review_id)}>Delete</Button>
+                    <Button basic size='mini' onClick={() => this.props.deleteReview(this.state.review.id)}>Delete</Button>
                 </div> :
                 <Button inverted size='large' id='review-btn' onClick={this.changeModalOpen}>Review It!</Button>}
                 <Modal open={this.state.open} basic size='small' >
@@ -74,7 +77,7 @@ class Review extends Component {
                                 <br />
                                 <Rating icon='star' rating={this.state.review.rating} maxRating={5} />
                         </div>
-                        <Form.TextArea name='content' placeholder='Your review' value={this.state.content} onChange={this.handleChange} />
+                        <Form.TextArea name='content' placeholder='Your review' value={this.state.review.content} onChange={this.handleChange} />
                         <Button type='submit'>Submit</Button>
                         <Button onClick={this.changeModalOpen} >Cancel</Button>
                     </Form>
