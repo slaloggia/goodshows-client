@@ -4,6 +4,9 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 Browse, search, and review your favorite Broadway shows! 
 
+home: ![image](https://user-images.githubusercontent.com/54509406/76033822-d537d200-5f02-11ea-9734-58985272676d.png)
+
+
 ### Live Site
 
 https://good-shows.herokuapp.com/
@@ -17,6 +20,9 @@ https://good-shows.herokuapp.com/
     - You can add reviews to shows on your "Seen" list. Edit or delete your reviews from your Dashboard
     - Comment on other users' reviews
     - In-app notifications when another user comments on your reviews
+    
+    dashboard: 
+![image](https://user-images.githubusercontent.com/54509406/76033873-ed0f5600-5f02-11ea-9ccb-1afdfe8ba465.png)
 
 ### Technologies
 
