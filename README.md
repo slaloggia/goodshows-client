@@ -40,6 +40,22 @@ Rails API backend - [repo](https://github.com/slaloggia/goodshows-api)
     - New reviews posted for shows you follow
 - Scheduled and automated scraping to add new shows and news aggregator
 
+## Local Installation
+It is recommended that you visit the GoodShows! website listed at the top of this README
+However, if you would like to run this project on your local environment, 
+please start by cloning the backend API linked in the Technologies section above and following the instructions in the README.
+
+Once your local rails server is running and you know your port number (see backend installation instructions)
+you will need to replace all instances of 'https://good-shows-api.herokuapp.com' in this code with 'http://localhost:[YOUR PORT NUMBER]'
+Most text editors have a global Find/Replace function that will make this easier.
+
+Next, run the following:
+```
+npm install 
+npm start
+```
+
+
 
 ## Learn More
 
