@@ -4,6 +4,9 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 Browse, search, and review your favorite Broadway shows! 
 
+![image](https://user-images.githubusercontent.com/54509406/76033822-d537d200-5f02-11ea-9734-58985272676d.png)
+
+
 ### Live Site
 GoodShows is live at the following url:
 https://good-shows.herokuapp.com/
