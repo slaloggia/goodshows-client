@@ -19,6 +19,7 @@ https://good-shows.herokuapp.com/
  - Create an account
 
  #### Logged in users
+ ![image](https://user-images.githubusercontent.com/54509406/76033873-ed0f5600-5f02-11ea-9ccb-1afdfe8ba465.png)
  - Upload a profile picture
  - Add shows to your lists
  - Review shows you have seen
